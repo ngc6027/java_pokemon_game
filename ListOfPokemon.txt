@@ -1,0 +1,14 @@
+Squirtle
+Warturtle
+Blastoise
+Poliwag
+
+Bulbosaur
+Ivysaur
+Venosaur
+Caterpie
+
+Charmander
+Charmeleon
+Charizard
+Vulpix
