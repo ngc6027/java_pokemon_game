@@ -5,6 +5,9 @@ import types.*;
 
 public class Pokemon {
 
+	private int currentHealth;
+	private int maxHealth;
+	
 	private FullState 		fullState;
 	private DamagedState 	damagedState;
 	private FaintedState 	faintedState;
@@ -12,7 +15,7 @@ public class Pokemon {
 	
 	private Type			type;
 	
-	public Pokemon(Type type)
+	public Pokemon(Type type, int maxHP)
 	{
 		fullState = new FullState(this);
 		damagedState = new DamagedState(this);
@@ -21,6 +24,9 @@ public class Pokemon {
 		this.currentState = this.fullState;
 		
 		this.type = type;
+	
+		maxHealth = maxHP;
+		currentHealth = maxHealth;
 		
 	}
 	
@@ -52,5 +58,38 @@ public class Pokemon {
 	public Type getType()
 	{
 		return this.type;
+	}
+	
+	public int attack(Pokemon target)
+	{
+		double damage = 0;
+		
+		// call the actual attack
+		
+		
+		damage = type.getFraction(target.getType()) * damage;
+		
+		damage = currentState.getAttackFraction() * damage;
+		
+		return((int) damage);
+	}
+	
+	public void takeDamage(int damage)
+	{
+		if(damage >= this.currentHealth)
+		{
+			this.currentHealth = 0;
+		}
+		else
+		{
+			this.currentHealth = this.currentHealth - damage;
+		}
+		
+		currentState.checkState(this.currentHealth, this.maxHealth);
+	}
+	
+	public int getCurrentHelath()
+	{
+		return this.currentHealth;
 	}
 }

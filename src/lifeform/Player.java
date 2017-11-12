@@ -44,6 +44,11 @@ public class Player implements Observer{
 		}
 	}
 	
+	public Pokemon getActivePokemon()
+	{
+		return this.activePokemon;
+	}
+	
 	public boolean addPokemon(Pokemon poke) 
 	{
 		boolean added = false;
