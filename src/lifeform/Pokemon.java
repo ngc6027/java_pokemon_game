@@ -1,6 +1,7 @@
 package lifeform;
 
 import states.*;
+import types.*;
 
 public class Pokemon {
 
@@ -9,13 +10,17 @@ public class Pokemon {
 	private FaintedState 	faintedState;
 	private HealthState 	currentState;
 	
-	public Pokemon()
+	private Type			type;
+	
+	public Pokemon(Type type)
 	{
 		fullState = new FullState(this);
 		damagedState = new DamagedState(this);
 		faintedState = new FaintedState(this);
 		
 		this.currentState = this.fullState;
+		
+		this.type = type;
 		
 	}
 	
@@ -42,5 +47,10 @@ public class Pokemon {
 	public void setCurrentState(HealthState state)
 	{
 		this.currentState = state;
+	}
+	
+	public Type getType()
+	{
+		return this.type;
 	}
 }
