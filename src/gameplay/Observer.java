@@ -1,5 +1,8 @@
 package gameplay;
 
-public class Observer {
+public interface Observer {
 
+	public abstract void updateTurn(int turn);
+	
+	public abstract int getTurn();
 }

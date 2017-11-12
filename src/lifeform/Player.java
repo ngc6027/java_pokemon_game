@@ -3,22 +3,32 @@ package lifeform;
 import java.util.ArrayList;
 
 import states.*;
+import gameplay.*;
 
-public class Player {
+public class Player implements Observer{
 
+	// Basic variables
 	private ArrayList<Pokemon> heldPokemon;
 	private int numPokemon;
 	private Pokemon activePokemon;
 	private Player opponent;
 	
+	// constant macros
 	static final int MAX_POKEMON = 3;
 	
-	public Player()
+	// Observer variables
+	private int turn;
+	private int id;
+	
+	public Player(int playerID)
 	{
 		this.heldPokemon = new ArrayList<Pokemon>();
 		this.numPokemon = 0;
 		this.activePokemon = null;
 		this.opponent = null;
+		
+		this.id = playerID;
+		this.turn = 0;
 	}
 	
 	public void setOpponent(Player opp)
@@ -59,4 +69,21 @@ public class Player {
 		
 		return(canAdd);
 	}
+	
+	public int getID()
+	{
+		return this.id;
+	}
+
+	@Override
+	public void updateTurn(int turn) {
+		this.turn = turn;
+	}
+	
+	@Override
+	public int getTurn()
+	{
+		return this.turn;
+	}
+	
 }
