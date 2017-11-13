@@ -5,7 +5,7 @@ Poliwag
 
 Bulbosaur
 Ivysaur
-Venosaur
+Venusaur
 Caterpie
 
 Charmander
