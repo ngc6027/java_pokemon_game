@@ -30,6 +30,10 @@ public class PokemonImages {
 		return(map.get(key));
 	}
 	
+	/**
+	 * Instantiates the HashMap for Pokemon Images.
+	 * @throws IOException
+	 */
 	private void createHash() throws IOException
 	{
 		map = new HashMap<String, Image>();
