@@ -21,17 +21,32 @@ JPanel array = new JPanel();
 getContentPane().add(array);
 JPanel attackPanel;
 JPanel namePanel;
+JPanel imagePanel;
 namePanel = new JPanel();
 attackPanel = new JPanel();
+imagePanel = new JPanel();
+//imagePanel = new JPanel();
  
  
-Font font = new Font("Courier", Font.BOLD,40);
+Font font = new Font("Courier", Font.BOLD,12);
  
  
+
  
 // Image Pokemon1 = new ImageIcon(this.getClass().getResource("/character.png")).getImage();
  
 ImageIcon start = new ImageIcon(getClass().getResource("ditto.png"));
+
+
+
+
+
+
+imagePanel.setLayout(new GridLayout(12,1));
+JButton image1 = new JButton(start);
+imagePanel.add(image1);
+
+
 //textButton = new JButton (start);
 //add(new JPanel());
 // JPanel panel = new JPanel();
@@ -47,7 +62,7 @@ ImageIcon start = new ImageIcon(getClass().getResource("ditto.png"));
 // for(int w=0; w<11;i++)
 // {
  
-namePanel.setLayout(new GridLayout(3,1));
+namePanel.setLayout(new GridLayout(36,1));
 JButton name1 = new JButton("Ditto");
 name1.setFont(font);
 namePanel.add(name1);
@@ -64,7 +79,7 @@ namePanel.add(name3);
  
  
  
-attackPanel.setLayout(new GridLayout(2,2));
+attackPanel.setLayout(new GridLayout(24,24));
 JButton attack1 = new JButton("attack 1");
 attack1.setFont(font);
 attackPanel.add(attack1);
@@ -84,7 +99,9 @@ attackPanel.add(attack4);
 //array.add(grid[i][w]);
 add("Center",namePanel);
 add("East",attackPanel);
-add ("West",new JButton(start));
+add ("West",imagePanel);
+
+
 // }
 // }
 //         add(new JButton("Button 3"));
@@ -135,6 +152,8 @@ setVisible(true);
  
 void creatingList()
 {
+	
+	
  
 }
  
