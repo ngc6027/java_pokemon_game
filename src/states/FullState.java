@@ -27,6 +27,9 @@ public class FullState extends HealthState{
 		
 	}
 
-	
+	@Override
+	public String getDescription() {
+		return "Full Health";
+	}
 	
 }

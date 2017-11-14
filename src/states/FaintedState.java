@@ -26,4 +26,9 @@ public class FaintedState extends HealthState{
 		}
 		
 	}
+
+	@Override
+	public String getDescription() {
+		return "Fainted";
+	}
 }

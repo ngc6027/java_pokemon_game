@@ -7,6 +7,7 @@ public class Pokemon {
 
 	private int currentHealth;
 	private int maxHealth;
+	private String name;
 	
 	private FullState 		fullState;
 	private DamagedState 	damagedState;
@@ -15,7 +16,7 @@ public class Pokemon {
 	
 	private Type			type;
 	
-	public Pokemon(Type type, int maxHP)
+	public Pokemon(Type type, int maxHP, String name)
 	{
 		fullState = new FullState(this);
 		damagedState = new DamagedState(this);
@@ -27,6 +28,7 @@ public class Pokemon {
 	
 		maxHealth = maxHP;
 		currentHealth = maxHealth;
+		this.name = name;
 		
 	}
 	
@@ -91,5 +93,10 @@ public class Pokemon {
 	public int getCurrentHelath()
 	{
 		return this.currentHealth;
+	}
+	
+	public String getDescription()
+	{
+		return this.name;
 	}
 }

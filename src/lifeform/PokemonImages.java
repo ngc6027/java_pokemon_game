@@ -9,12 +9,12 @@ import javax.imageio.ImageIO;
 
 public class PokemonImages {
 	
-	private static String[] pokemonNames = {"Squirtle", "Warturtle", "Blastoise", "Poliwag",
-											 "Bulbosaur", "Ivysaur", "Venusaur", "Caterpie",
+	private static String[] pokemonNames = {"Squirtle", "Worturtle", "Blastoise", "Poliwag",
+											 "Bulbasaur", "Ivysaur", "Venusaur", "Caterpie",
 											 "Charmander", "Charmeleon", "Charizard", "Vulpix"};
 	
-	private static String[] fileLocations = {"squirtle.png", "warturtle.png", "blastoise.png", "poliwag.png",
-											 "bulbosaur.png", "ivysaur.png", "venusaur.png", "caterpie.png",
+	private static String[] fileLocations = {"squirtle.png", "worturtle.png", "blastoise.png", "poliwag.png",
+											 "bulbasaur.png", "ivysaur.png", "venusaur.png", "caterpie.png",
 											 "charmander.png", "charmeleon.png", "charizard.png", "vulpix.png"};
 	
 	private static HashMap<String, Image> map = null;

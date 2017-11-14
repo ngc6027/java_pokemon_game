@@ -3,7 +3,7 @@ Warturtle
 Blastoise
 Poliwag
 
-Bulbosaur
+Bulbasaur
 Ivysaur
 Venusaur
 Caterpie

@@ -12,4 +12,5 @@ public abstract class HealthState {
 	
 	public abstract double getAttackFraction();
 	public abstract void checkState(int currentHealth, int maxHealth);
+	public abstract String getDescription();
 }

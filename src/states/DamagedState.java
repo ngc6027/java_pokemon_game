@@ -26,4 +26,9 @@ public class DamagedState extends HealthState{
 		}
 		
 	}
+
+	@Override
+	public String getDescription() {
+		return "Damaged";
+	}
 }
