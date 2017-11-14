@@ -37,7 +37,7 @@ JPanel imagePanel2;
 JPanel panelArray = new JPanel();
 JButton image1;
 
-Font font = new Font("Courier", Font.BOLD,12);
+Font font = new Font("Courier", Font.BOLD,10);
 
 public SelectionGUI() throws IOException {
 
@@ -203,23 +203,23 @@ JButton image1 = new JButton(start);
 imagePanel.add(image1);
 
 namePanel.setLayout(new GridLayout(1,3));
-JButton name1 = new JButton(pokemon.getDescription());
+JButton name1 = new JButton(pokemon.getDescription()+"\n"+Integer.toString(pokemon.getCurrentHelath())+"\n"+pokemon.getType().getDescription());
 name1.setFont(font);
 namePanel.add(name1);
 
-JButton name2 = new JButton(Integer.toString(pokemon.getCurrentHelath()));
-name1.setFont(font);
-namePanel.add(name2);
+//JButton name2 = new JButton(Integer.toString(pokemon.getCurrentHelath()));
+//name1.setFont(font);
+//namePanel.add(name2);
+//
+//JButton name3 = new JButton(pokemon.getType().getDescription());
+//name1.setFont(font);
+//namePanel.add(name3);
 
-JButton name3 = new JButton(pokemon.getType().getDescription());
-name1.setFont(font);
-namePanel.add(name3);
 
-attackPanel.setLayout(new GridLayout(2, 2));
 
 while(pokemon.hasNextPokemon())
 {
-	
+	attackPanel.setLayout(new GridLayout());
 	JButton attack = new JButton(pokemon.nextPokemon().getDescription());
 	attack.setFont(font);
 	attackPanel.add(attack);
