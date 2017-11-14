@@ -3,18 +3,24 @@ package lifeform;
 import states.*;
 import types.*;
 
+import java.util.ArrayList;
+
+import attacks.*;
+
 public class Pokemon {
 
-	private int currentHealth;
-	private int maxHealth;
-	private String name;
+	protected int 				currentHealth;
+	protected int 				maxHealth;
+	protected String 			name;
 	
-	private FullState 		fullState;
-	private DamagedState 	damagedState;
-	private FaintedState 	faintedState;
-	private HealthState 	currentState;
+	protected FullState 		fullState;
+	protected DamagedState 		damagedState;
+	protected FaintedState 		faintedState;
+	protected HealthState 		currentState;
 	
-	private Type			type;
+	protected Type				type;
+	
+	protected ArrayList<Attack>	attacks;
 	
 	public Pokemon(Type type, int maxHP, String name)
 	{
@@ -29,6 +35,8 @@ public class Pokemon {
 		maxHealth = maxHP;
 		currentHealth = maxHealth;
 		this.name = name;
+		
+		this.attacks = new ArrayList<Attack>();
 		
 	}
 	
@@ -62,7 +70,7 @@ public class Pokemon {
 		return this.type;
 	}
 	
-	public int attack(Pokemon target)
+	public int attack(Pokemon target, int attackNum)
 	{
 		double damage = 0;
 		
