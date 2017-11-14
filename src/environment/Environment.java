@@ -91,9 +91,24 @@ public class Environment implements Observer, Iterator{
 	
 	private void createAllPokemon()
 	{
+		// Grass Types
 		this.pokemon.add(new Bulbasaur());
 		this.pokemon.add(new Ivysaur());
 		this.pokemon.add(new Venusaur());
+		this.pokemon.add(new Caterpie());
+		
+		// Fire Types
+		this.pokemon.add(new Charmander());
+		this.pokemon.add(new Charmeleon());
+		this.pokemon.add(new Charizard());
+		this.pokemon.add(new Vulpix());
+		
+		// Water Types
+		this.pokemon.add(new Squirtle());
+		this.pokemon.add(new Wartortle());
+		this.pokemon.add(new Blastoise());
+		this.pokemon.add(new Poliwag());
+		
 	}
 	
 	private void createAllPlayers()
