@@ -5,7 +5,7 @@ public class VineWhip extends Attack{
 	@Override
 	public double calculateDamage() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 4.0;
 	}
 
 	@Override

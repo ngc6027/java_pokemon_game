@@ -2,10 +2,10 @@ package environment;
 
 import java.util.ArrayList;
 
-import gameplay.Observer;
+import gameplay.*;
 import lifeform.*;
 
-public class Environment implements Observer{
+public class Environment implements Observer, Iterator{
 
 	private ArrayList<Player> players;
 	private ArrayList<Pokemon> pokemon;
@@ -13,23 +13,30 @@ public class Environment implements Observer{
 	private Pokemon selectedPokemon;
 	
 	private int turn;
+	private int pokemonIterator;
 	
 	private Environment()
 	{
 		this.players = new ArrayList<Player>();
+		createAllPlayers();
 		this.turn = 0;
 		this.pokemon = new ArrayList<Pokemon>();
 		createAllPokemon();
 		this.selectedPokemon = null;
+		
+		this.pokemonIterator = 0;
 	}
 	
 	public static Environment getEnvironment()
 	{
-		synchronized (Environment.class)
+		if (uniqueInstance == null)
 		{
-			if (uniqueInstance == null)
+			synchronized (Environment.class)
 			{
-				new Environment();
+				if (uniqueInstance == null)
+				{
+					new Environment();
+				}
 			}
 		}
 		
@@ -77,7 +84,15 @@ public class Environment implements Observer{
 	
 	private void createAllPokemon()
 	{
-		
+		this.pokemon.add(new Bulbasaur());
+		this.pokemon.add(new Ivysaur());
+		this.pokemon.add(new Venusaur());
+	}
+	
+	private void createAllPlayers()
+	{
+		this.players.add(new Player(0));
+		this.players.add(new Player(1));
 	}
 	
 	public Pokemon getPokemon(int index)
@@ -88,5 +103,24 @@ public class Environment implements Observer{
 	public void resetGame()
 	{
 		//give all pokemon full health
+	}
+	
+	public boolean hasNext()
+	{
+		boolean hasNext = false;
+		
+		if (this.pokemonIterator < pokemon.size())
+		{
+			hasNext = true;
+		}
+		
+		return hasNext;
+	}
+	
+	public Pokemon next()
+	{
+		Pokemon p = pokemon.get(this.pokemonIterator);
+		this.pokemonIterator++;
+		return p;
 	}
 }

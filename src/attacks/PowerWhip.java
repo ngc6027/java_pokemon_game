@@ -5,7 +5,7 @@ public class PowerWhip extends Attack{
 	@Override
 	public double calculateDamage() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 2.0;
 	}
 
 	@Override

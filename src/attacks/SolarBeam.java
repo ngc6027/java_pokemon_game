@@ -5,7 +5,7 @@ public class SolarBeam extends Attack {
 	@Override
 	public double calculateDamage() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 5.0;
 	}
 
 	@Override

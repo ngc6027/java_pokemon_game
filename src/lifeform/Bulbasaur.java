@@ -1,14 +1,12 @@
 package lifeform;
 
-import java.util.ArrayList;
-
-import types.Type;
+import types.*;
 import attacks.*;
 
 public class Bulbasaur extends Pokemon {
 
-	public Bulbasaur(Type type, int maxHP, String name) {
-		super(type, maxHP, name);
+	public Bulbasaur() {
+		super(new GrassType(), 100, "Bulbasaur");
 		
 		attacks.add(new Tackle());
 		attacks.add(new VineWhip());

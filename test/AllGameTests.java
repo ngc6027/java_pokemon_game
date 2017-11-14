@@ -8,6 +8,7 @@ import gui.*;
 import gameplay.*;
 import states.*;
 import types.*;
+import attacks.*;
 
 /**
  * Runs all of the tests in this project.
@@ -18,6 +19,9 @@ import types.*;
 @Suite.SuiteClasses(
 		{
 			TestType.class,
-			TestTimer.class
+			TestTimer.class,
+			
+			TestPokemon.class,
+			TestAttacks.class
 		})
 public class AllGameTests {}

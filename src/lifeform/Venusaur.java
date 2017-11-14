@@ -1,14 +1,12 @@
 package lifeform;
 
-import java.util.ArrayList;
-
 import attacks.*;
-import types.Type;
+import types.*;
 
 public class Venusaur extends Pokemon {
 
-	public Venusaur(Type type, int maxHP, String name) {
-		super(type, maxHP, name);
+	public Venusaur() {
+		super(new GrassType(), 100, "Venusaur");
 
 		attacks.add(new RazorLeaf());
 		attacks.add(new VineWhip());

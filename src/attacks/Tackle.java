@@ -5,7 +5,7 @@ public class Tackle extends Attack {
 	@Override
 	public double calculateDamage() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1.0;
 	}
 
 	@Override

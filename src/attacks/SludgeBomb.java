@@ -5,7 +5,7 @@ public class SludgeBomb extends Attack{
 	@Override
 	public double calculateDamage() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 3.0;
 	}
 
 	@Override

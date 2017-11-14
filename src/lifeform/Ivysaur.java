@@ -1,14 +1,12 @@
 package lifeform;
 
-import java.util.ArrayList;
-
 import attacks.*;
-import types.Type;
+import types.*;
 
 public class Ivysaur extends Pokemon {
 
-	public Ivysaur(Type type, int maxHP, String name) {
-		super(type, maxHP, name);
+	public Ivysaur() {
+		super(new GrassType(), 100, "Ivysaur");
 		
 		attacks.add(new RazorLeaf());
 		attacks.add(new VineWhip());

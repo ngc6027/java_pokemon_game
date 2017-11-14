@@ -6,21 +6,23 @@ import types.*;
 import java.util.ArrayList;
 
 import attacks.*;
+import gameplay.Iterator;
 
-public class Pokemon {
+public abstract class Pokemon implements Iterator {
 
-	protected int 				currentHealth;
-	protected int 				maxHealth;
-	protected String 			name;
+	private int 				currentHealth;
+	private int 				maxHealth;
+	private String	 			name;
 	
-	protected FullState 		fullState;
-	protected DamagedState 		damagedState;
-	protected FaintedState 		faintedState;
-	protected HealthState 		currentState;
+	private FullState 			fullState;
+	private DamagedState 		damagedState;
+	private FaintedState 		faintedState;
+	private HealthState 		currentState;
 	
-	protected Type				type;
+	private Type				type;
 	
 	protected ArrayList<Attack>	attacks;
+	private int attackIterator;
 	
 	public Pokemon(Type type, int maxHP, String name)
 	{
@@ -37,6 +39,7 @@ public class Pokemon {
 		this.name = name;
 		
 		this.attacks = new ArrayList<Attack>();
+		attackIterator = 0;
 		
 	}
 	
@@ -68,6 +71,16 @@ public class Pokemon {
 	public Type getType()
 	{
 		return this.type;
+	}
+	
+	public String getTypeDescription()
+	{
+		return this.type.getDescription();
+	}
+	
+	public String getAttackDescription(int index)
+	{
+		return this.attacks.get(index).getDescription();
 	}
 	
 	public int attack(Pokemon target, int attackNum)
@@ -107,4 +120,34 @@ public class Pokemon {
 	{
 		return this.name;
 	}
+	
+	public boolean hasNext()
+	{
+		boolean hasNext = false;
+		
+		if(this.attackIterator < attacks.size())
+		{
+			hasNext = true;
+		}
+		
+		return hasNext;
+	}
+	
+	public Attack next()
+	{
+		Attack a = attacks.get(attackIterator);
+		attackIterator++;
+		return a;
+	}
+	
+	public void resetAttackIterator()
+	{
+		this.attackIterator = 0;
+	}
+	
+	public int getCurrentHealth()
+	{
+		return this.currentHealth;
+	}
+	
 }
