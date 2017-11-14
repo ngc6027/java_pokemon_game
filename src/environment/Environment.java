@@ -9,7 +9,7 @@ import gameplay.*;
 import gui.PokemonImages;
 import lifeform.*;
 
-public class Environment implements Observer, Iterator{
+public class Environment implements Observer, Iterator {
 
 	private ArrayList<Player> players;
 	private ArrayList<Pokemon> pokemon;
@@ -98,16 +98,16 @@ public class Environment implements Observer, Iterator{
 		this.pokemon.add(new Caterpie());
 		
 		// Fire Types
-//		this.pokemon.add(new Charmander());
-//		this.pokemon.add(new Charmeleon());
-//		this.pokemon.add(new Charizard());
-//		this.pokemon.add(new Vulpix());
-//		
-//		// Water Types
-//		this.pokemon.add(new Squirtle());
-//		this.pokemon.add(new Wartortle());
-//		this.pokemon.add(new Blastoise());
-//		this.pokemon.add(new Poliwag());
+		this.pokemon.add(new Charmander());
+		this.pokemon.add(new Charmeleon());
+		this.pokemon.add(new Charizard());
+		this.pokemon.add(new Vulpix());
+		
+		// Water Types
+		this.pokemon.add(new Squirtle());
+		this.pokemon.add(new Wartortle());
+		this.pokemon.add(new Blastoise());
+		this.pokemon.add(new Poliwag());
 		
 	}
 	
