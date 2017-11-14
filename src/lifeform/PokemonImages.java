@@ -9,11 +9,11 @@ import javax.imageio.ImageIO;
 
 public class PokemonImages {
 	
-	private static String[] pokemonNames = {"Squirtle", "Worturtle", "Blastoise", "Poliwag",
+	private static String[] pokemonNames = {"Squirtle", "Wartortle", "Blastoise", "Poliwag",
 											 "Bulbasaur", "Ivysaur", "Venusaur", "Caterpie",
 											 "Charmander", "Charmeleon", "Charizard", "Vulpix"};
 	
-	private static String[] fileLocations = {"squirtle.png", "worturtle.png", "blastoise.png", "poliwag.png",
+	private static String[] fileLocations = {"squirtle.png", "wartortle.png", "blastoise.png", "poliwag.png",
 											 "bulbasaur.png", "ivysaur.png", "venusaur.png", "caterpie.png",
 											 "charmander.png", "charmeleon.png", "charizard.png", "vulpix.png"};
 	
