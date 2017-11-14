@@ -26,13 +26,13 @@ public class Timer {
 	
 	public void updateTurn()
 	{
-		if (this.turn == 1)
+		if (this.turn == 0)
 		{
-			this.turn = 2;
+			this.turn = 1;
 		} 
 		else
 		{
-			this.turn = 1;
+			this.turn = 0;
 		}
 		
 		notifyObservers();

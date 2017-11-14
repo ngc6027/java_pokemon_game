@@ -23,4 +23,9 @@ public class FireType extends Type{
 		return modifier;
 	}
 
+	@Override
+	public String getDescription() {
+		return "Fire";
+	}
+
 }

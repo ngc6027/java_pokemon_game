@@ -7,4 +7,5 @@ public abstract class Type {
 	static final double HALF_DAMAGE 	= 0.5;
 	
 	public abstract double getFraction(Type opponentType);
+	public abstract String getDescription();
 }

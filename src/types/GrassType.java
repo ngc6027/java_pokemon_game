@@ -23,4 +23,9 @@ public class GrassType extends Type{
 		
 		return modifier;
 	}
+
+	@Override
+	public String getDescription() {
+		return "Grass";
+	}
 }

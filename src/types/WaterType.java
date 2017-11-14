@@ -21,4 +21,9 @@ public class WaterType extends Type{
 		
 		return modifier;
 	}
+
+	@Override
+	public String getDescription() {
+		return "Water";
+	}
 }

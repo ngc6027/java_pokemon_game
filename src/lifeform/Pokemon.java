@@ -3,18 +3,26 @@ package lifeform;
 import states.*;
 import types.*;
 
-public class Pokemon {
+import java.util.ArrayList;
 
-	private int currentHealth;
-	private int maxHealth;
-	private String name;
+import attacks.*;
+import gameplay.Iterator;
+
+public abstract class Pokemon implements Iterator {
+
+	private int 				currentHealth;
+	private int 				maxHealth;
+	private String	 			name;
 	
-	private FullState 		fullState;
-	private DamagedState 	damagedState;
-	private FaintedState 	faintedState;
-	private HealthState 	currentState;
+	private FullState 			fullState;
+	private DamagedState 		damagedState;
+	private FaintedState 		faintedState;
+	private HealthState 		currentState;
 	
-	private Type			type;
+	private Type				type;
+	
+	protected ArrayList<Attack>	attacks;
+	private int attackIterator;
 	
 	public Pokemon(Type type, int maxHP, String name)
 	{
@@ -29,6 +37,9 @@ public class Pokemon {
 		maxHealth = maxHP;
 		currentHealth = maxHealth;
 		this.name = name;
+		
+		this.attacks = new ArrayList<Attack>();
+		attackIterator = 0;
 		
 	}
 	
@@ -62,7 +73,17 @@ public class Pokemon {
 		return this.type;
 	}
 	
-	public int attack(Pokemon target)
+	public String getTypeDescription()
+	{
+		return this.type.getDescription();
+	}
+	
+	public String getAttackDescription(int index)
+	{
+		return this.attacks.get(index).getDescription();
+	}
+	
+	public int attack(Pokemon target, int attackNum)
 	{
 		double damage = 0;
 		
@@ -99,4 +120,34 @@ public class Pokemon {
 	{
 		return this.name;
 	}
+	
+	public boolean hasNext()
+	{
+		boolean hasNext = false;
+		
+		if(this.attackIterator < attacks.size())
+		{
+			hasNext = true;
+		}
+		
+		return hasNext;
+	}
+	
+	public Attack next()
+	{
+		Attack a = attacks.get(attackIterator);
+		attackIterator++;
+		return a;
+	}
+	
+	public void resetAttackIterator()
+	{
+		this.attackIterator = 0;
+	}
+	
+	public int getCurrentHealth()
+	{
+		return this.currentHealth;
+	}
+	
 }
