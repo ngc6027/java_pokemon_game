@@ -2,6 +2,6 @@ package gameplay;
 
 public interface Iterator {
 
-	public abstract boolean hasNext();
-	public abstract Object next();
+	public abstract boolean hasNextPokemon();
+	public abstract Object nextPokemon();
 }

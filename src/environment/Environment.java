@@ -1,8 +1,12 @@
 package environment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import gameplay.*;
+import gui.PokemonImages;
 import lifeform.*;
 
 public class Environment implements Observer, Iterator{
@@ -10,6 +14,7 @@ public class Environment implements Observer, Iterator{
 	private ArrayList<Player> players;
 	private ArrayList<Pokemon> pokemon;
 	private volatile static Environment uniqueInstance;
+	private PokemonImages images;
 	private Pokemon selectedPokemon;
 	
 	private int turn;
@@ -25,6 +30,8 @@ public class Environment implements Observer, Iterator{
 		this.selectedPokemon = null;
 		
 		this.pokemonIterator = 0;
+		
+		images = new PokemonImages();
 	}
 	
 	public static Environment getEnvironment()
@@ -35,7 +42,7 @@ public class Environment implements Observer, Iterator{
 			{
 				if (uniqueInstance == null)
 				{
-					new Environment();
+					uniqueInstance = new Environment();
 				}
 			}
 		}
@@ -105,7 +112,7 @@ public class Environment implements Observer, Iterator{
 		//give all pokemon full health
 	}
 	
-	public boolean hasNext()
+	public boolean hasNextPokemon()
 	{
 		boolean hasNext = false;
 		
@@ -113,14 +120,23 @@ public class Environment implements Observer, Iterator{
 		{
 			hasNext = true;
 		}
+		else
+		{
+			this.pokemonIterator = 0;
+		}
 		
 		return hasNext;
 	}
 	
-	public Pokemon next()
+	public Pokemon nextPokemon()
 	{
 		Pokemon p = pokemon.get(this.pokemonIterator);
 		this.pokemonIterator++;
 		return p;
+	}
+	
+	public ImageIcon getPokemonImage(String name) throws IOException
+	{
+		return images.getImage(name);
 	}
 }

@@ -121,7 +121,7 @@ public abstract class Pokemon implements Iterator {
 		return this.name;
 	}
 	
-	public boolean hasNext()
+	public boolean hasNextPokemon()
 	{
 		boolean hasNext = false;
 		
@@ -129,20 +129,19 @@ public abstract class Pokemon implements Iterator {
 		{
 			hasNext = true;
 		}
+		else
+		{
+			this.attackIterator = 0;
+		}
 		
 		return hasNext;
 	}
 	
-	public Attack next()
+	public Attack nextPokemon()
 	{
 		Attack a = attacks.get(attackIterator);
 		attackIterator++;
 		return a;
-	}
-	
-	public void resetAttackIterator()
-	{
-		this.attackIterator = 0;
 	}
 	
 	public int getCurrentHealth()

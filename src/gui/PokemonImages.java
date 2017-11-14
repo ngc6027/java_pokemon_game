@@ -1,11 +1,13 @@
 package gui;
 
-import java.awt.Image;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class PokemonImages {
 	
@@ -17,9 +19,9 @@ public class PokemonImages {
 											 "bulbasaur.png", "ivysaur.png", "venusaur.png", "caterpie.png",
 											 "charmander.png", "charmeleon.png", "charizard.png", "vulpix.png"};
 	
-	private static HashMap<String, Image> map = null;
+	private static HashMap<String, ImageIcon> map = null;
 	
-	public Image getImage(String key) throws IOException
+	public ImageIcon getImage(String key) throws IOException
 	{
 		/* For lazy-loading the list */
 		if(map == null)
@@ -36,11 +38,11 @@ public class PokemonImages {
 	 */
 	private void createHash() throws IOException
 	{
-		map = new HashMap<String, Image>();
+		map = new HashMap<String, ImageIcon>();
 		
 		for(int i = 0; i < pokemonNames.length; i++)
 		{
-			map.put(pokemonNames[i], ImageIO.read(new File(fileLocations[i])));
+			map.put(pokemonNames[i], new ImageIcon(getClass().getResource(fileLocations[i])));
 		}
 	}
 }
