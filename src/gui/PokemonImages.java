@@ -1,4 +1,4 @@
-package lifeform;
+package gui;
 
 import java.awt.Image;
 import java.io.File;
