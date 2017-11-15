@@ -61,7 +61,8 @@ public class Environment implements Observer, Iterator {
 
 	public void assignPokemon(int index)
 	{		
-		this.players.get(turn - 1).addPokemon(this.pokemon.get(index));
+		this.players.get(turn).addPokemon(this.pokemon.get(index));	
+		
 		this.timer.update();
 	}
 	
@@ -100,7 +101,15 @@ public class Environment implements Observer, Iterator {
 	
 	public Pokemon getPokemon(int index)
 	{
-		return pokemon.get(index);
+		if(pokemon.get(index) != null)
+		{
+			return pokemon.get(index);
+		}
+		else
+		{
+			return null;
+		}
+///////////////////////////////////added the return null here to check something		
 	}
 	
 	public void resetGame()
@@ -146,4 +155,10 @@ public class Environment implements Observer, Iterator {
 	{
 		return this.turn;
 	}
+	
+	public Player getPlayer(int index)
+	{
+		return players.get(index);
+	}
+	
 }

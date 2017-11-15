@@ -35,6 +35,9 @@ public class Timer {
 			this.turn = 0;
 		}
 		
+		//turn++;
+		//turn = turn%2;
+		
 		notifyObservers();
 	}
 	

@@ -93,4 +93,13 @@ public class Player implements Observer{
 		return this.turn;
 	}
 	
+	public Pokemon getPokemon(int index)
+	{
+		return heldPokemon.get(index);
+	}
+	
+	
+	
+	
+	
 }
