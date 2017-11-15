@@ -5,28 +5,23 @@ import lifeform.*;
 
 public class SelectPokemonCommand extends Command{
 	
-	private Pokemon pokemon;
+	private int pokemonNum;
 	
 	public SelectPokemonCommand()
 	{
 		this.env = Environment.getEnvironment();
-		this.pokemon = null;
+		this.pokemonNum = -1;
 	}
 	
 	@Override
 	public void execute() {
-		Player p = env.getPlayer();
-		
-		if (p != null)
-		{
-			p.addPokemon(this.pokemon);
-		}
-		
+		env.assignPokemon(pokemonNum);
+		this.pokemonNum = -1;
 	}
 	
-	public void setPokemon(Pokemon p)
+	public void setPokemon(int pokemonNum)
 	{
-		this.pokemon = p;
+		this.pokemonNum = pokemonNum;
 	}
 
 }

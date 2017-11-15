@@ -85,10 +85,4 @@ public class Player implements Observer{
 		this.turn = turn;
 	}
 	
-	@Override
-	public int getTurn()
-	{
-		return this.turn;
-	}
-	
 }

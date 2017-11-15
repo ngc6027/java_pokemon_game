@@ -20,6 +20,8 @@ public class Environment implements Observer, Iterator {
 	private int turn;
 	private int pokemonIterator;
 	
+	private Timer timer;
+	
 	private Environment()
 	{
 		this.players = new ArrayList<Player>();
@@ -32,6 +34,15 @@ public class Environment implements Observer, Iterator {
 		this.pokemonIterator = 0;
 		
 		images = new PokemonImages();
+		
+		this.timer = new Timer();
+		
+		timer.register(this);
+		
+		for(int i = 0; i < players.size(); i++)
+		{
+			timer.register(players.get(i));
+		}
 	}
 	
 	public static Environment getEnvironment()
@@ -49,44 +60,16 @@ public class Environment implements Observer, Iterator {
 		
 		return uniqueInstance;
 	}
-	
-	public void addPlayer(Player toAdd)
-	{
-		this.players.add(toAdd);
-	}
-	
-	public void removePlayer(Player toRemove)
-	{
-		this.players.remove(toRemove);
-	}
 
-	public Player getPlayer()
-	{
-		Player ret = null;
-		
-		if(players.get(turn - 1) != null)
-		{
-			ret =  players.get(turn - 1);
-		}
-		
-		return ret;
+	public void assignPokemon(int index)
+	{		
+		this.players.get(turn - 1).addPokemon(this.pokemon.get(index));
+		this.timer.updateTurn();
 	}
 	
 	@Override
 	public void updateTurn(int turn) {
 		this.turn = turn;
-		
-	}
-
-	@Override
-	public int getTurn() {
-		// TODO Auto-generated method stub
-		return turn;
-	}
-	
-	public void setSelectedPokemon(Pokemon poke)
-	{
-		this.selectedPokemon = poke;
 	}
 	
 	private void createAllPokemon()
@@ -153,5 +136,10 @@ public class Environment implements Observer, Iterator {
 	public ImageIcon getPokemonImage(String name) throws IOException
 	{
 		return images.getImage(name);
+	}
+	
+	public void registerWithTimer(Observer o)
+	{
+		this.timer.register(o);
 	}
 }
