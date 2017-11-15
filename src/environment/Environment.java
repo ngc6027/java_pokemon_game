@@ -15,7 +15,6 @@ public class Environment implements Observer, Iterator {
 	private ArrayList<Pokemon> pokemon;
 	private volatile static Environment uniqueInstance;
 	private PokemonImages images;
-	private Pokemon selectedPokemon;
 	
 	private int turn;
 	private int pokemonIterator;
@@ -29,7 +28,6 @@ public class Environment implements Observer, Iterator {
 		this.turn = 0;
 		this.pokemon = new ArrayList<Pokemon>();
 		createAllPokemon();
-		this.selectedPokemon = null;
 		
 		this.pokemonIterator = 0;
 		
@@ -64,7 +62,7 @@ public class Environment implements Observer, Iterator {
 	public void assignPokemon(int index)
 	{		
 		this.players.get(turn - 1).addPokemon(this.pokemon.get(index));
-		this.timer.updateTurn();
+		this.timer.update();
 	}
 	
 	@Override
@@ -110,7 +108,7 @@ public class Environment implements Observer, Iterator {
 		//give all pokemon full health
 	}
 	
-	public boolean hasNextPokemon()
+	public boolean hasNext()
 	{
 		boolean hasNext = false;
 		
@@ -126,7 +124,7 @@ public class Environment implements Observer, Iterator {
 		return hasNext;
 	}
 	
-	public Pokemon nextPokemon()
+	public Pokemon next()
 	{
 		Pokemon p = pokemon.get(this.pokemonIterator);
 		this.pokemonIterator++;
@@ -141,5 +139,11 @@ public class Environment implements Observer, Iterator {
 	public void registerWithTimer(Observer o)
 	{
 		this.timer.register(o);
+	}
+
+	@Override
+	public int getTurn() 
+	{
+		return this.turn;
 	}
 }

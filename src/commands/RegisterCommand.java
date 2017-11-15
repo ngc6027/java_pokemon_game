@@ -19,7 +19,7 @@ public class RegisterCommand extends Command {
 		env.registerWithTimer(this.o);
 	}
 	
-	public void addObserver(Observer o)
+	public void setObserver(Observer o)
 	{
 		this.o = o;
 	}

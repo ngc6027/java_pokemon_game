@@ -73,16 +73,6 @@ public abstract class Pokemon implements Iterator {
 		return this.type;
 	}
 	
-	public String getTypeDescription()
-	{
-		return this.type.getDescription();
-	}
-	
-	public String getAttackDescription(int index)
-	{
-		return this.attacks.get(index).getDescription();
-	}
-	
 	public int attack(Pokemon target, int attackNum)
 	{
 		double damage = 0;
@@ -111,17 +101,12 @@ public abstract class Pokemon implements Iterator {
 		currentState.checkState(this.currentHealth, this.maxHealth);
 	}
 	
-	public int getCurrentHelath()
-	{
-		return this.currentHealth;
-	}
-	
 	public String getDescription()
 	{
 		return this.name;
 	}
 	
-	public boolean hasNextPokemon()
+	public boolean hasNext()
 	{
 		boolean hasNext = false;
 		
@@ -137,7 +122,7 @@ public abstract class Pokemon implements Iterator {
 		return hasNext;
 	}
 	
-	public Attack nextPokemon()
+	public Attack next()
 	{
 		Attack a = attacks.get(attackIterator);
 		attackIterator++;

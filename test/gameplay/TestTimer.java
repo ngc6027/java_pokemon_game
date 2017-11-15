@@ -42,7 +42,7 @@ public class TestTimer {
 		t.register(player2);
 		assertEquals(1, player2.getTurn());
 		
-		t.updateTurn();
+		t.update();
 		
 		assertEquals(2, player1.getTurn());
 		assertEquals(2, player2.getTurn());

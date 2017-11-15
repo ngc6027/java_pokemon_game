@@ -24,7 +24,7 @@ public class Timer {
 		this.observers.remove(toRemove);
 	}
 	
-	public void updateTurn()
+	public void update()
 	{
 		if (this.turn == 0)
 		{

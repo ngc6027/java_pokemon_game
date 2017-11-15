@@ -36,11 +36,14 @@ public class Player implements Observer{
 		this.opponent = opp;
 	}
 	
-	public void changeActivePokemon(Pokemon poke)
+	public void changeActivePokemon(int poke)
 	{
-		if (!(poke.getCurrentState() instanceof FaintedState) && (heldPokemon.contains(poke)))
+		if(poke < 3)
 		{
-			this.activePokemon = poke;
+			if (!(heldPokemon.get(poke).getCurrentState() instanceof FaintedState))
+			{
+				this.activePokemon = heldPokemon.get(poke);
+			}
 		}
 	}
 	
@@ -83,6 +86,11 @@ public class Player implements Observer{
 	@Override
 	public void updateTurn(int turn) {
 		this.turn = turn;
+	}
+
+	public int getTurn() 
+	{
+		return this.turn;
 	}
 	
 }
