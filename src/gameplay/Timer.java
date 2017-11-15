@@ -15,8 +15,11 @@ public class Timer {
 	
 	public void register(Observer toAdd)
 	{
-		this.observers.add(toAdd);
-		toAdd.updateTurn(this.turn);
+		if(!(this.observers.contains(toAdd)))
+		{
+			this.observers.add(toAdd);
+			toAdd.updateTurn(this.turn);
+		}
 	}
 	
 	public void remove(Observer toRemove)

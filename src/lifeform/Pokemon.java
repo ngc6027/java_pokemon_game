@@ -72,7 +72,7 @@ public abstract class Pokemon implements Iterator {
 	{
 		return this.type;
 	}
-	
+	/*
 	public int attack(Pokemon target, int attackNum)
 	{
 		double damage = 0;
@@ -100,7 +100,7 @@ public abstract class Pokemon implements Iterator {
 		
 		currentState.checkState(this.currentHealth, this.maxHealth);
 	}
-	
+	*/
 	public String getDescription()
 	{
 		return this.name;

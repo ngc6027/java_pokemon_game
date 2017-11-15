@@ -16,7 +16,7 @@ public class FaintedState extends HealthState{
 	
 	@Override
 	public void checkState(int currentHealth, int maxHealth) {
-		if((currentHealth < maxHealth) && (currentHealth != 0))
+		if((currentHealth < maxHealth) && (currentHealth > 0))
 		{
 			pokemon.setCurrentState(pokemon.getDamagedState());
 		} 

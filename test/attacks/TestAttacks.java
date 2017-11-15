@@ -6,49 +6,28 @@ import org.junit.Test;
 
 public class TestAttacks {
 	
-	@Test
-	public void testTackle() 
-	{
-		Attack a = new Tackle();
+	private class MockAttack extends Attack {
+
+		@Override
+		public double calculateDamage() {
+			return 15.0;
+		}
+
+		@Override
+		public String getDescription() {
+			return "Mock Attack";
+		}
 		
-		assertEquals("Tackle", a.getDescription());
-		assertEquals(1.0, a.calculateDamage(), 0.001);
 	}
 	
 	@Test
-	public void testVineWhip() 
+	public void testAttack() 
 	{
-		Attack a = new VineWhip();
+		Attack a = new MockAttack();
 		
-		assertEquals("Vine Whip", a.getDescription());
-		assertEquals(4.0, a.calculateDamage(), 0.001);
+		assertEquals("Mock Attack", a.getDescription());
+		assertEquals(15.0, a.calculateDamage(), 0.001);
 	}
 	
-	@Test
-	public void testPowerWhip() 
-	{
-		Attack a = new PowerWhip();
-		
-		assertEquals("Power Whip", a.getDescription());
-		assertEquals(2.0, a.calculateDamage(), 0.001);
-	}
-	
-	@Test
-	public void testSludgeBomb() 
-	{
-		Attack a = new SludgeBomb();
-		
-		assertEquals("Sludge Bomb", a.getDescription());
-		assertEquals(3.0, a.calculateDamage(), 0.001);
-	}
-	
-	@Test
-	public void testSolarBeam() 
-	{
-		Attack a = new SolarBeam();
-		
-		assertEquals("Solar Beam", a.getDescription());
-		assertEquals(5.0, a.calculateDamage(), 0.001);
-	}
 
 }

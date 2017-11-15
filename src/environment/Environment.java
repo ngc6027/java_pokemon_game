@@ -41,6 +41,8 @@ public class Environment implements Observer, Iterator {
 		{
 			timer.register(players.get(i));
 		}
+		
+		resetGame();
 	}
 	
 	public static Environment getEnvironment()
@@ -114,6 +116,15 @@ public class Environment implements Observer, Iterator {
 	
 	public void resetGame()
 	{
+		for(int i = 0; i < players.size(); i++)
+		{
+			players.get(i).resetGame();
+		}
+		
+		while(this.turn != 0)
+		{
+			timer.update();
+		}
 		//give all pokemon full health
 	}
 	

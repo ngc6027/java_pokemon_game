@@ -28,12 +28,7 @@ public class Player implements Observer{
 		this.opponent = null;
 		
 		this.id = playerID;
-		this.turn = 0;
-	}
-	
-	public void setOpponent(Player opp)
-	{
-		this.opponent = opp;
+		this.turn = -1;
 	}
 	
 	public void changeActivePokemon(int poke)
@@ -46,12 +41,7 @@ public class Player implements Observer{
 			}
 		}
 	}
-	
-	public Pokemon getActivePokemon()
-	{
-		return this.activePokemon;
-	}
-	
+		
 	public boolean addPokemon(Pokemon poke) 
 	{
 		boolean added = false;
@@ -99,7 +89,38 @@ public class Player implements Observer{
 	}
 	
 	
+	public void resetGame()
+	{
+		heldPokemon.clear();
+		this.numPokemon = heldPokemon.size();
+		this.opponent = null;
+		this.activePokemon = null;
+	}
 	
+	public int getNumPokemon()
+	{
+		return this.numPokemon;
+	}
+	
+	public Player getOpponent()
+	{
+		return this.opponent;
+	}
+	
+	public void setOpponent(Player opp)
+	{
+		this.opponent = opp;
+	}
+	
+	public Pokemon getActivePokemon()
+	{
+		return this.activePokemon;
+	}
+	
+	public void setActivePokemon(int index)
+	{
+		this.activePokemon = heldPokemon.get(index);
+	}
 	
 	
 }

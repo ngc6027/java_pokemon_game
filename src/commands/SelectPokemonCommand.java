@@ -1,7 +1,6 @@
 package commands;
 
 import environment.*;
-import lifeform.*;
 
 public class SelectPokemonCommand extends Command{
 	

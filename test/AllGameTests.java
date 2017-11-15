@@ -22,6 +22,12 @@ import attacks.*;
 			TestTimer.class,
 			
 			TestPokemon.class,
-			TestAttacks.class
+			TestAttacks.class,
+			TestCommand.class,
+			TestEnvironment.class,
+			TestIterator.class,
+			TestObserver.class,
+			TestPlayer.class,
+			TestStates.class
 		})
 public class AllGameTests {}

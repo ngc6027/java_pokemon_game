@@ -34,19 +34,39 @@ public class TestTimer {
 		
 		Timer t = new Timer();
 		
-		assertEquals(0, player1.getTurn());
+		assertEquals(-1, player1.getTurn());
 		t.register(player1);
-		assertEquals(1, player1.getTurn());
+		assertEquals(0, player1.getTurn());
 		
-		assertEquals(0, player2.getTurn());
+		assertEquals(-1, player2.getTurn());
 		t.register(player2);
-		assertEquals(1, player2.getTurn());
+		assertEquals(0, player2.getTurn());
 		
 		t.update();
 		
-		assertEquals(2, player1.getTurn());
-		assertEquals(2, player2.getTurn());
+		assertEquals(1, player1.getTurn());
+		assertEquals(1, player2.getTurn());
 		
+	}
+	
+	@Test
+	public void testRemoveObservers()
+	{
+		Player player1 = new Player(1);
+		Player player2 = new Player(2);
+		
+		Timer t = new Timer();
+		
+		t.register(player1);
+		t.register(player2);
+		
+		assertEquals(2, t.getNumObservers());
+		
+		t.remove(player1);
+		assertEquals(1, t.getNumObservers());
+		
+		t.remove(player2);
+		assertEquals(0, t.getNumObservers());
 	}
 	
 }

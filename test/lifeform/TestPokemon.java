@@ -50,4 +50,30 @@ public class TestPokemon {
 		assertFalse(p.hasNext());
 	}
 	
+	@Test
+	public void testSetCurrentState()
+	{
+		Pokemon p = new MockPokemon();
+		
+		p.setCurrentState(p.getDamagedState());
+		assertTrue(p.getCurrentState() instanceof DamagedState);
+		
+		p.setCurrentState(p.getFaintedState());
+		assertTrue(p.getCurrentState() instanceof FaintedState);
+	}
+	
+	@Test
+	public void testIterator()
+	{
+		Pokemon p = new MockPokemon();
+		
+		for(int i = 0; i < 4; i++)
+		{
+			assertTrue(p.hasNext());
+			assertTrue(p.next() instanceof Attack);
+		}
+		
+		assertFalse(p.hasNext());
+	}
+	
 }
