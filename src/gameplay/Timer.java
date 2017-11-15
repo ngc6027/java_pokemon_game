@@ -10,7 +10,7 @@ public class Timer {
 	public Timer()
 	{
 		this.observers = new ArrayList<Observer>();
-		this.turn = 1;
+		this.turn = 0;
 	}
 	
 	public void register(Observer toAdd)

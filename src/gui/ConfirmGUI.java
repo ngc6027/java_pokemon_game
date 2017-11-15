@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import javax.swing.*;
 import environment.*;
 
+import lifeform.*;
+
 public class ConfirmGUI extends JFrame
 {
 	JPanel mainPanel;
@@ -19,6 +21,7 @@ public class ConfirmGUI extends JFrame
 	{
 		//set this frame up and call to build the main guts
 		super("Please Confirm");
+		this.e = Environment.getEnvironment();
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(400,400);
@@ -61,16 +64,22 @@ public class ConfirmGUI extends JFrame
 		playerOne.add(pokemon);
 		
 		JButton p1 = new JButton();
-		//p1.setText(e.getPlayer(0).getPokemon(0).getDescription());
-		p1.setText("Charzard");
+		
+		Player p = e.getPlayer(0);
+		Pokemon poke = p.getPokemon(0);
+		poke.getDescription();
+		
+		
+		p1.setText(e.getPlayer(0).getPokemon(0).getDescription());
+		//p1.setText("Charzard");
 		pokemon.add(p1);
 		JButton p2 = new JButton();
-		//p2.setText(e.getPlayer(0).getPokemon(1).getDescription());
-		p2.setText("Wartortle");
+		p2.setText(e.getPlayer(0).getPokemon(1).getDescription());
+		//p2.setText("Wartortle");
 		pokemon.add(p2);
 		JButton p3 = new JButton();
-		//p3.setText(e.getPlayer(0).getPokemon(2).getDescription());
-		p3.setText("Vulpix");
+		p3.setText(e.getPlayer(0).getPokemon(2).getDescription());
+		//p3.setText("Vulpix");
 		pokemon.add(p3);
 		
 	}
@@ -85,16 +94,16 @@ public class ConfirmGUI extends JFrame
 		
 		
 		JButton p1 = new JButton();
-		//p1.setText(e.getPlayer(1).getPokemon(0).getDescription());
-		p1.setText("Blastoise");
+		p1.setText(e.getPlayer(1).getPokemon(0).getDescription());
+		//p1.setText("Blastoise");
 		pokemon.add(p1);
 		JButton p2 = new JButton();
-		//p2.setText(e.getPlayer(1).getPokemon(1).getDescription());
-		p2.setText("Charmeleon");
+		p2.setText(e.getPlayer(1).getPokemon(1).getDescription());
+		//p2.setText("Charmeleon");
 		pokemon.add(p2);
 		JButton p3 = new JButton();
-		//p3.setText(e.getPlayer(1).getPokemon(2).getDescription());
-		p3.setText("Venusaur");
+		p3.setText(e.getPlayer(1).getPokemon(2).getDescription());
+		//p3.setText("Venusaur");
 		pokemon.add(p3);
 	}
 	

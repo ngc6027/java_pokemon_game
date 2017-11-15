@@ -35,19 +35,19 @@ public class TestPokemon {
 		
 		assertEquals(100, p.getCurrentHealth());
 		
-		assertTrue(p.hasNextPokemon());
-		assertEquals("Tackle", p.nextPokemon().getDescription());
+		assertTrue(p.hasNext());
+		assertEquals("Tackle", p.next().getDescription());
 		
-		assertTrue(p.hasNextPokemon());
-		assertEquals("Vine Whip", p.nextPokemon().getDescription());
+		assertTrue(p.hasNext());
+		assertEquals("Vine Whip", p.next().getDescription());
 		
-		assertTrue(p.hasNextPokemon());
-		assertEquals("Power Whip", p.nextPokemon().getDescription());
+		assertTrue(p.hasNext());
+		assertEquals("Power Whip", p.next().getDescription());
 		
-		assertTrue(p.hasNextPokemon());
-		assertEquals("Sludge Bomb", p.nextPokemon().getDescription());
+		assertTrue(p.hasNext());
+		assertEquals("Sludge Bomb", p.next().getDescription());
 		
-		assertFalse(p.hasNextPokemon());
+		assertFalse(p.hasNext());
 	}
 	
 }
