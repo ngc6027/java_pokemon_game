@@ -31,15 +31,20 @@ public class Player implements Observer{
 		this.turn = -1;
 	}
 	
-	public void changeActivePokemon(int poke)
+	public boolean changeActivePokemon(int poke)
 	{
-		if(poke < 3)
+		boolean changed = false;
+		
+		if(poke < 4)
 		{
 			if (!(heldPokemon.get(poke).getCurrentState() instanceof FaintedState))
 			{
 				this.activePokemon = heldPokemon.get(poke);
+				changed = true;
 			}
 		}
+		
+		return changed;
 	}
 		
 	public boolean addPokemon(Pokemon poke) 
@@ -93,7 +98,6 @@ public class Player implements Observer{
 	{
 		heldPokemon.clear();
 		this.numPokemon = heldPokemon.size();
-		this.opponent = null;
 		this.activePokemon = null;
 	}
 	
@@ -117,10 +121,12 @@ public class Player implements Observer{
 		return this.activePokemon;
 	}
 	
-	public void setActivePokemon(int index)
+	public void attack(int attackNum)
 	{
-		this.activePokemon = heldPokemon.get(index);
+		if(this.activePokemon != null)
+		{
+			this.activePokemon.attack(this.opponent.getActivePokemon(), attackNum);
+		}
 	}
-	
 	
 }

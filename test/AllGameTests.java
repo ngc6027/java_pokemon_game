@@ -4,11 +4,11 @@ import org.junit.runners.Suite;
 import lifeform.*;
 import environment.*;
 import commands.*;
-import gui.*;
 import gameplay.*;
 import states.*;
 import types.*;
 import attacks.*;
+//import gui.*;
 
 /**
  * Runs all of the tests in this project.

@@ -69,7 +69,7 @@ public class TestEnvironment {
 	}
 	
 	@Test
-	public void testIterator() throws IOException
+	public void testGetImage() throws IOException
 	{
 		Environment e = Environment.getEnvironment();
 		
@@ -82,7 +82,7 @@ public class TestEnvironment {
 	}
 	
 	@Test
-	public void testGetImage()
+	public void testIterator()
 	{
 		Environment e = Environment.getEnvironment();
 		
@@ -95,5 +95,23 @@ public class TestEnvironment {
 		}
 		
 		assertFalse(e.hasNext());
+	}
+	
+	@Test
+	public void testAttack()
+	{
+		Environment e = Environment.getEnvironment();
+		
+		e.resetGame();
+		
+		e.assignPokemon(0);		// Bulbasaur to Player 1
+		e.assignPokemon(11);	// Poliwag to Player 2
+		
+		e.changeActivePokemon(0);
+		e.changeActivePokemon(0);
+		
+		e.attack(2);
+		assertEquals(96, e.getPlayer(1).getActivePokemon().getCurrentHealth());
+		
 	}
 }

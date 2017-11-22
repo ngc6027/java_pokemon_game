@@ -72,19 +72,21 @@ public abstract class Pokemon implements Iterator {
 	{
 		return this.type;
 	}
-	/*
-	public int attack(Pokemon target, int attackNum)
+	
+	public void attack(Pokemon target, int attackNum)
 	{
 		double damage = 0;
 		
 		// call the actual attack
+		damage = this.attacks.get(attackNum).calculateDamage();
 		
-		
+		// add type modifier
 		damage = type.getFraction(target.getType()) * damage;
 		
+		// add modifier based on current health of this pokemon
 		damage = currentState.getAttackFraction() * damage;
 		
-		return((int) damage);
+		target.takeDamage((int) Math.round(damage));
 	}
 	
 	public void takeDamage(int damage)
@@ -100,7 +102,7 @@ public abstract class Pokemon implements Iterator {
 		
 		currentState.checkState(this.currentHealth, this.maxHealth);
 	}
-	*/
+	
 	public String getDescription()
 	{
 		return this.name;

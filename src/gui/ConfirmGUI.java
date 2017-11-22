@@ -123,7 +123,7 @@ public class ConfirmGUI extends JFrame implements ActionListener
 			{
 				setVisible(false);
 				//open up the final screen for the battle 
-				new BattleGUI();
+				//new BattleGUI();
 			}
 	}
 	

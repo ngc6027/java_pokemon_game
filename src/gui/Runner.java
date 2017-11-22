@@ -10,7 +10,7 @@ public class Runner
 	{
 		//new SelectionGUI();
 		//new ConfirmGUI();
-		new BattleGUI();
+		//new BattleGUI();
 	}
 
 	
