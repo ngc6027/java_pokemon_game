@@ -8,14 +8,9 @@ public class TestAttacks {
 	
 	private class MockAttack extends Attack {
 
-		@Override
-		public double calculateDamage() {
-			return 15.0;
-		}
-
-		@Override
-		public String getDescription() {
-			return "Mock Attack";
+		public MockAttack()
+		{
+			super(3, "Mock Attack");
 		}
 		
 	}

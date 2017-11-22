@@ -111,7 +111,7 @@ public class TestPlayer {
 		p2.changeActivePokemon(0);
 		
 		p1.attack(3);
-		assertEquals(95, p2.getActivePokemon().getCurrentHealth());
+		assertEquals(90, p2.getActivePokemon().getCurrentHealth());
 		
 	}
 	

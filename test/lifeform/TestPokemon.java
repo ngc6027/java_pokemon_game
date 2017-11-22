@@ -83,11 +83,11 @@ public class TestPokemon {
 		Pokemon p2 = new MockPokemon(new WaterType());
 		
 		p1.attack(p2, 0);
-		assertEquals(99, p2.getCurrentHealth());
+		assertEquals(95, p2.getCurrentHealth());
 		assertTrue(p2.getCurrentState() instanceof DamagedState);
 		
 		p2.attack(p1, 3);
-		assertEquals(92, p1.getCurrentHealth());
+		assertEquals(84, p1.getCurrentHealth());
 		assertTrue(p1.getCurrentState() instanceof DamagedState);
 	}
 	
@@ -98,11 +98,11 @@ public class TestPokemon {
 		Pokemon grassPoke = new MockPokemon(new GrassType());
 		
 		firePoke.attack(grassPoke, 1);
-		assertEquals(92, grassPoke.getCurrentHealth());
+		assertEquals(80, grassPoke.getCurrentHealth());
 		assertTrue(grassPoke.getCurrentState() instanceof DamagedState);
 		
 		grassPoke.attack(firePoke, 1);
-		assertEquals(98, firePoke.getCurrentHealth());
+		assertEquals(96, firePoke.getCurrentHealth());
 		assertTrue(firePoke.getCurrentState() instanceof DamagedState);
 	}
 	
