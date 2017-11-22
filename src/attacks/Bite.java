@@ -2,15 +2,8 @@ package attacks;
 
 public class Bite extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 2.0;
+	public Bite()
+	{
+		super(1, "Bite");
 	}
-
-	@Override
-	public String getDescription() {
-		return "Bite";
-	}
-
 }

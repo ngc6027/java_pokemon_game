@@ -2,15 +2,8 @@ package attacks;
 
 public class AquaJet extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 3.0;
+	public AquaJet()
+	{
+		super(2, "Aqua Jet");
 	}
-
-	@Override
-	public String getDescription() {
-		return "Aqua Jet";
-	}
-
 }

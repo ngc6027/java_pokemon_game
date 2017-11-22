@@ -11,8 +11,8 @@ public class Poliwag extends Pokemon {
 		
 		this.attacks.add(new Bubble());
 		this.attacks.add(new MudShot());
-		this.attacks.add(new BodySlam());
 		this.attacks.add(new AquaJet());
+		this.attacks.add(new BodySlam());
 		
 	}
 	

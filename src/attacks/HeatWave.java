@@ -2,15 +2,9 @@ package attacks;
 
 public class HeatWave extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 3.0;
+	public HeatWave()
+	{
+		super(3, "Heat Wave");
 	}
-
-	@Override
-	public String getDescription() {
-		return "Heat Wave";
-	}
-
+	
 }

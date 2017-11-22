@@ -2,15 +2,9 @@ package attacks;
 
 public class WaterGun extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 3.0;
+	public WaterGun()
+	{
+		super(2, "Water Gun");
 	}
-
-	@Override
-	public String getDescription() {
-		return "Water Gun";
-	}
-
+	
 }
