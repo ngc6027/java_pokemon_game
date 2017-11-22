@@ -221,6 +221,11 @@ public void actionPerformed(ActionEvent e)
 			
 			//calls to update turn button
 			turnButtonDraw(turn);
+			
+			//set the button so that it cant be clicked on anymore
+			images[x].setEnabled(false);
+			
+			
 		}
 	  }
    }
