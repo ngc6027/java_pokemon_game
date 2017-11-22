@@ -136,4 +136,11 @@ public abstract class Pokemon implements Iterator {
 		return this.currentHealth;
 	}
 	
+	public void resetGame()
+	{
+		this.currentHealth = this.maxHealth;
+		this.attackIterator = 0;
+		this.currentState = this.fullState;
+	}
+	
 }

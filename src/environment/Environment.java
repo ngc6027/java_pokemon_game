@@ -122,7 +122,11 @@ public class Environment implements Observer, Iterator {
 		{
 			timer.update();
 		}
-		//give all pokemon full health
+		
+		for(int i = 0; i < pokemon.size(); i++)
+		{
+			pokemon.get(i).resetGame();
+		}
 	}
 	
 	public boolean hasNext()
