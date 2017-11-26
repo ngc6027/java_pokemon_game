@@ -6,15 +6,15 @@ public class ChangeActivePokemonCommand extends Command {
 
 	private int pokemonNum;
 	
-	public ChangeActivePokemonCommand()
+	public ChangeActivePokemonCommand(int turn)
 	{
-		this.env = Environment.getEnvironment();
+		super(turn);
 		this.pokemonNum = -1;
 	}
 	
 	@Override
 	public void execute() {
-		env.changeActivePokemon(pokemonNum);
+		env.changeActivePokemon(pokemonNum, turn);
 		this.pokemonNum = -1;
 
 	}

@@ -8,7 +8,7 @@ public class SelectPokemonCommand extends Command{
 	
 	public SelectPokemonCommand()
 	{
-		this.env = Environment.getEnvironment();
+		super(-1);
 		this.pokemonNum = -1;
 	}
 	

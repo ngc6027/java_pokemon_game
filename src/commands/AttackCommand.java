@@ -6,17 +6,16 @@ public class AttackCommand extends Command {
 
 	private int attackNum;
 	
-	public AttackCommand()
+	public AttackCommand(int turn)
 	{
-		this.env = Environment.getEnvironment();
+		super(turn);
 		this.attackNum = -1;
 	}
 	
 	@Override
 	public void execute() {
-		env.attack(attackNum);
+		env.attack(attackNum, turn);
 		this.attackNum = -1;
-
 	}
 	
 	public void setAttack(int attackNum)

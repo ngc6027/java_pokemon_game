@@ -5,12 +5,12 @@ import gameplay.*;
 
 public class RegisterCommand extends Command {
 
-	private Environment env;
 	private Observer o;
 	
 	public RegisterCommand()
 	{
-		this.env = Environment.getEnvironment();
+		super(-1);
+		this.o = null;
 	}
 	
 	@Override

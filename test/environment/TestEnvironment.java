@@ -107,10 +107,10 @@ public class TestEnvironment {
 		e.assignPokemon(0);		// Bulbasaur to Player 1
 		e.assignPokemon(11);	// Poliwag to Player 2
 		
-		e.changeActivePokemon(0);
-		e.changeActivePokemon(0);
+		e.changeActivePokemon(0, 0);
+		e.changeActivePokemon(0, 1);
 		
-		e.attack(2);
+		e.attack(2, 0);
 		assertEquals(70, e.getPlayer(1).getActivePokemon().getCurrentHealth());
 		
 	}
