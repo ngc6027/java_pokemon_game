@@ -193,16 +193,19 @@ public class Environment implements Observer, Iterator {
 		}
 	}
 	
-	public boolean changeActivePokemon(int pokemonNum, int turn)
+	public void changeActivePokemon(int pokemonNum, int turn)
 	{
 		boolean success = false;
 		
 		if(turn == this.turn)
 		{
 			success = this.players.get(turn).changeActivePokemon(pokemonNum);
+		}
+		
+		if(success)
+		{
 			this.timer.update();
 		}
 		
-		return success;
 	}
 }
