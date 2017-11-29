@@ -5,8 +5,17 @@ import static org.junit.Assert.*;
 
 import lifeform.*;
 
+/**
+ * Test class for a pokemon's states
+ * @author Michael Foreman
+ *
+ */
 public class TestStates {
 
+	/**
+	 * Tests that a pokemon with full health is in the full healthstate,
+	 * and that it transitions accordingly when hit 
+	 */
 	@Test
 	public void testFullState()
 	{
@@ -22,6 +31,10 @@ public class TestStates {
 		assertTrue(p.getCurrentState() instanceof FaintedState);
 	}
 	
+	/**
+	 * Tests that a damaged pokemon is in the correct state, 
+	 * and transitions accordingly 
+	 */
 	@Test
 	public void testDamagedState()
 	{
@@ -38,6 +51,10 @@ public class TestStates {
 		assertTrue(p.getCurrentState() instanceof FullState);
 	}
 	
+	/**
+	 * Tests that a pokemon with 0 health is in the fainted state, and that
+	 * it will transition accordingly when healed
+	 */
 	@Test
 	public void testFaintedState()
 	{
