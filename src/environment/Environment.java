@@ -9,6 +9,13 @@ import gameplay.*;
 import gui.PokemonImages;
 import lifeform.*;
 
+/**
+ * This class holds all players, Pokemon, and the timer for the game. All
+ * actions pass through the environment from the GUIs to the players and 
+ * the Pokemon.
+ * 
+ * @author Michael Foreman
+ */
 public class Environment implements Observer, Iterator {
 
 	private ArrayList<Player> players;
@@ -21,6 +28,17 @@ public class Environment implements Observer, Iterator {
 	
 	private Timer timer;
 	
+	
+	/* ****************************************************************
+	 * 																  *
+	 * 						  Singleton Pattern                       *
+	 *																  *
+	 * ****************************************************************/
+	
+	/**
+	 * This instantiates all players, all Pokemon, the timer, and loads
+	 * the images for the Pokemon.
+	 */
 	private Environment()
 	{
 		this.players = new ArrayList<Player>();
@@ -47,6 +65,9 @@ public class Environment implements Observer, Iterator {
 		resetGame();
 	}
 	
+	/**
+	 * @returns the unique instance of Environment
+	 */
 	public static Environment getEnvironment()
 	{
 		if (uniqueInstance == null)
@@ -63,11 +84,160 @@ public class Environment implements Observer, Iterator {
 		return uniqueInstance;
 	}
 
+	/* ******************************************************
+	 * 						End Singleton					*
+	 * ******************************************************/
+	
+	
+	
+	/* ****************************************************************
+	 * 																  *
+	 * 						  Observer Pattern                        *
+	 *																  *
+	 * ****************************************************************/
+	
+	/**
+	 * Updates which player's turn it is. Called by the timer.
+	 */
 	@Override
 	public void updateTurn(int turn) {
 		this.turn = turn;
 	}
 	
+	/**
+	 * @return the Environment's understanding of whose turn it is.
+	 */
+	@Override
+	public int getTurn() 
+	{
+		return this.turn;
+	}
+	
+	/* ******************************************************
+	 * 						End Observer					*
+	 * ******************************************************/
+	
+	
+	
+	/* ****************************************************************
+	 * 																  *
+	 * 						  Iterator Pattern                        *
+	 *																  *
+	 * ****************************************************************/
+	
+	/**
+	 * @return whether there is another Pokemon to retrieve from the list.
+	 */
+	public boolean hasNext()
+	{
+		boolean hasNext = false;
+		
+		if (this.pokemonIterator < pokemon.size())
+		{
+			hasNext = true;
+		}
+		else
+		{
+			this.pokemonIterator = 0;
+		}
+		
+		return hasNext;
+	}
+	
+	/**
+	 * @return the next Pokemon in the list.
+	 */
+	public Pokemon next()
+	{
+		Pokemon p = pokemon.get(this.pokemonIterator);
+		this.pokemonIterator++;
+		return p;
+	}
+	
+	/* ******************************************************
+	 * 						End Iterator					*
+	 * ******************************************************/
+
+	
+	/* ****************************************************************
+	 * 																  *
+	 * 						  Command Pattern                         *
+	 *																  *
+	 * ****************************************************************/
+	/**
+	 * Assigns a Pokemon to the player whose turn it is.
+	 * 
+	 * @param index the index of the Pokemon to assign.
+	 */
+	public void assignPokemon(int index)
+	{		
+		this.players.get(turn).addPokemon(this.pokemon.get(index));	
+		
+		this.timer.update();
+	}
+	
+	/**
+	 * Commands a player's active Pokemon to attack his opponent's
+	 * active Pokemon. Must be the player's turn, as determined by
+	 * the game's timer. Updates the timer if the command goes through.
+	 * 
+	 * @param attackNum the number of the active Pokemon's attack
+	 * @param playerNum the number of the player who sent the command
+	 */
+	public void attack(int attackNum, int playerNum)
+	{
+		// check if it is the player's turn who sent the command
+		if(playerNum == this.turn)
+		{
+			this.players.get(playerNum).attack(attackNum);
+			this.timer.update();
+		}
+	}
+	
+	/**
+	 * Changes the active Pokemon of the player. Updates the timer if
+	 * the player was able to change their active Pokemon.
+	 * 
+	 * @param pokemonNum the number of the Pokemon to switch to
+	 * @param playerNum the number of the player who sent the command
+	 */
+	public void changeActivePokemon(int pokemonNum, int playerNum)
+	{
+		boolean success = false;
+		
+		// check if it is the player's turn who sent the command
+		if(playerNum == this.turn)
+		{
+			success = this.players.get(playerNum).changeActivePokemon(pokemonNum);
+		}
+		
+		/*
+			only update if the player could change their active Pokemon to the
+			desired Pokemon.
+		*/
+		if(success)
+		{
+			this.timer.update();
+		}
+		
+	}
+	
+	/**
+	 * Registers an Observer with the game's Timer.
+	 * @param o
+	 */
+	public void registerWithTimer(Observer o)
+	{
+		this.timer.register(o);
+	}
+	
+	/* ******************************************************
+	 * 						End Command					    *
+	 * ******************************************************/
+	
+	/**
+	 * Instantiates all 12 Pokemon for the game.
+	 */
 	private void createAllPokemon()
 	{
 		// Grass Types
@@ -90,6 +260,10 @@ public class Environment implements Observer, Iterator {
 		
 	}
 	
+	/**
+	 * Instantiates two players for the game. Sets their opponent to the
+	 * other player.
+	 */
 	private void createAllPlayers()
 	{
 		this.players.add(new Player(0));
@@ -99,11 +273,17 @@ public class Environment implements Observer, Iterator {
 		this.players.get(1).setOpponent(this.players.get(0));
 	}
 	
+	/**
+	 * Gets a Pokemon from the array of all Pokemon.
+	 * 
+	 * @param index the index of the Pokemon to retrieve
+	 * @return the desired Pokemon
+	 */
 	public Pokemon getPokemon(int index)
 	{
 		Pokemon rc = null;
 		
-		if(pokemon.get(index) != null)
+		if((index > 0) && (index < pokemon.size()))
 		{
 			rc = pokemon.get(index);
 		}
@@ -111,6 +291,11 @@ public class Environment implements Observer, Iterator {
 		return rc;		
 	}
 	
+	/**
+	 * Resets the game to its initial state. Resets the timer to 0,
+	 * resets Pokemon to their initial states, and removes all Pokemon
+	 * from all players.
+	 */
 	public void resetGame()
 	{
 		for(int i = 0; i < players.size(); i++)
@@ -129,83 +314,23 @@ public class Environment implements Observer, Iterator {
 		}
 	}
 	
-	public boolean hasNext()
-	{
-		boolean hasNext = false;
-		
-		if (this.pokemonIterator < pokemon.size())
-		{
-			hasNext = true;
-		}
-		else
-		{
-			this.pokemonIterator = 0;
-		}
-		
-		return hasNext;
-	}
-	
-	public Pokemon next()
-	{
-		Pokemon p = pokemon.get(this.pokemonIterator);
-		this.pokemonIterator++;
-		return p;
-	}
-	
+	/**
+	 * @param name the name of the Pokemon whose image should be retrieved
+	 * @return the image of the desired Pokemon
+	 * @throws IOException
+	 */
 	public ImageIcon getPokemonImage(String name) throws IOException
 	{
 		return images.getImage(name);
 	}
 	
-	public void registerWithTimer(Observer o)
-	{
-		this.timer.register(o);
-	}
-
-	@Override
-	public int getTurn() 
-	{
-		return this.turn;
-	}
-	
+	/**
+	 * @param index the Player to retrieve
+	 * @return the desired Player
+	 */
 	public Player getPlayer(int index)
 	{
 		return players.get(index);
 	}
 	
-	/* ******************************************************************************
-	 *                        Commands for Command Pattern                          *
-	 * ******************************************************************************/
-	
-	public void assignPokemon(int index)
-	{		
-		this.players.get(turn).addPokemon(this.pokemon.get(index));	
-		
-		this.timer.update();
-	}
-	
-	public void attack(int attackNum, int turn)
-	{
-		if(turn == this.turn)
-		{
-			this.players.get(turn).attack(attackNum);
-			this.timer.update();
-		}
-	}
-	
-	public void changeActivePokemon(int pokemonNum, int turn)
-	{
-		boolean success = false;
-		
-		if(turn == this.turn)
-		{
-			success = this.players.get(turn).changeActivePokemon(pokemonNum);
-		}
-		
-		if(success)
-		{
-			this.timer.update();
-		}
-		
-	}
 }
