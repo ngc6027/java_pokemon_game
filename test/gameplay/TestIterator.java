@@ -3,8 +3,18 @@ package gameplay;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Test class used for the iterator for pokemon in the environment and 
+ * the pokemon's attacks
+ * @author Michael Foreman
+ */
 public class TestIterator {
 
+	/**
+	 * Mock iterator to test the functionality with being dependent
+	 * on a concrete class
+	 * @author Michael Foreman
+	 */
 	private class MockIterator implements Iterator
 	{
 
@@ -41,6 +51,10 @@ public class TestIterator {
 		}
 	}
 	
+	/**
+	 * Ensures the iterator moves correctly
+	 * and stops at the appropriate time
+	 */
 	@Test
 	public void testIteration()
 	{

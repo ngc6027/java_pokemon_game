@@ -3,8 +3,17 @@ package gameplay;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Test class for Observers of the Timer
+ * @author Michael Foreman
+ */
 public class TestObserver {
 
+	/**
+	 * Mock Observer class for testing functionality without 
+	 * being dependent on a concrete class
+	 * @author Michael Foreman
+	 */
 	private class MockObserver implements Observer
 	{
 
@@ -28,6 +37,10 @@ public class TestObserver {
 		
 	}
 	
+	/**
+	 * Verifies that an added observer is correctly updated to th
+	 * current turn
+	 */
 	@Test
 	public void testUpdateTurn()
 	{

@@ -1,5 +1,11 @@
 package types;
 
+/**
+ * Abstract class for types that defines the damage modifiers
+ * and shared methods
+ * @author Michael Foreman
+ *
+ */
 public abstract class Type {
 
 	static final double DOUBLE_DAMAGE 	= 2.0;

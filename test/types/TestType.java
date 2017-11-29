@@ -3,8 +3,17 @@ package types;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+/**
+ * Test class for the 3 different types of pokemon 
+ * @author Michael Foreman
+ *
+ */
 public class TestType {
 
+	/**
+	 * Tests that a water type pokemon's damage is modified according 
+	 * to what type of pokemon it is attacking
+	 */
 	@Test
 	public void testWaterType()
 	{
@@ -20,6 +29,10 @@ public class TestType {
 		assertEquals(Type.HALF_DAMAGE, typeToTest.getFraction(grassType), epsilon);
 	}
 	
+	/**
+	 * Tests that a fire type pokemon's damage is modified according 
+	 * to what type of pokemon it is attacking
+	 */
 	@Test
 	public void testFireType()
 	{
@@ -35,6 +48,10 @@ public class TestType {
 		assertEquals(Type.HALF_DAMAGE, typeToTest.getFraction(waterType), epsilon);
 	}
 	
+	/**
+	 * Tests that a grass type pokemon's damage is modified according 
+	 * to what type of pokemon it is attacking
+	 */
 	@Test
 	public void testGrassType()
 	{

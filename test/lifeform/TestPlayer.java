@@ -3,8 +3,17 @@ package lifeform;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Test class for the player that the GUI interacts with
+ * @author Michael Foreman
+ *
+ */
 public class TestPlayer {
 
+	/**
+	 * Ensures a player is initilaized correctly and has no pokemon, 
+	 * no opponent and is set to the correct turn
+	 */
 	@Test
 	public void testInitialization()
 	{
@@ -17,6 +26,10 @@ public class TestPlayer {
 		assertEquals(-1, p1.getTurn());
 	}
 	
+	/**
+	 * Ensures a player can hold three pokemon, that the numpokemon is updated
+	 * accordingly, and that a player cannot hold more than three pokemon
+	 */
 	@Test
 	public void testAddPokemon()
 	{
@@ -39,6 +52,10 @@ public class TestPlayer {
 		assertEquals(3, p.getNumPokemon());
 	}
 	
+	/**
+	 * Ensures a player can succesfully switch their active pokemon
+	 * during a battle
+	 */
 	@Test
 	public void testChangeActivePokemon()
 	{
@@ -55,6 +72,10 @@ public class TestPlayer {
 		assertEquals("Poliwag", p.getActivePokemon().getDescription());
 	}
 	
+	/**
+	 * Ensures that players can add each other as opponesnts to that
+	 * their pokemon can attack each other
+	 */
 	@Test
 	public void testSetOpponent()
 	{
@@ -68,6 +89,10 @@ public class TestPlayer {
 		assertEquals(p1, p2.getOpponent());
 	}
 	
+	/**
+	 * Tests to verify that all players and pokemon and turns are reset
+	 * when the game is over, in order to run the game again
+	 */
 	public void testResetGame()
 	{
 		Player p1 = new Player(0);
@@ -95,6 +120,10 @@ public class TestPlayer {
 		
 	}
 	
+	/**
+	 * Ensures a player is able to attack anothers pokemon
+	 * and that the correct damage is done 
+	 */
 	@Test
 	public void testAttack()
 	{

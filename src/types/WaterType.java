@@ -1,6 +1,16 @@
 package types;
 
+/**
+* Concrete Type class for Watertype Pokemon
+* @author Michael Foreman
+*/
 public class WaterType extends Type{
+	
+	/**
+	 * Calculates the correct damage modifier based on what type
+	 * it is attacking
+	 *@return damage modifier
+	 */
 	@Override
 	public double getFraction(Type opponentType) {
 		
@@ -22,6 +32,10 @@ public class WaterType extends Type{
 		return modifier;
 	}
 
+	/**
+	 * Returns the appropriate description
+	 * @return the String description
+	 */
 	@Override
 	public String getDescription() {
 		return "Water";

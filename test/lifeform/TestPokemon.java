@@ -7,8 +7,19 @@ import attacks.*;
 import types.*;
 import states.*;
 
+/**
+ * Test class for the pokemon class
+ * @author Michael Foreman
+ *
+ */
 public class TestPokemon {
 
+	/**
+	 * Mock Pokemon exists to test the functionality all pokemon
+	 * should share, so testing is not dependent on implementation
+	 * @author jb7656
+	 *
+	 */
 	private class MockPokemon extends Pokemon
 	{
 		public MockPokemon(Type type) {
@@ -22,6 +33,11 @@ public class TestPokemon {
 		}
 	}
 	
+	/**
+	 * Ensures a mock pokemon can be created and is initilaized to the
+	 * correct state, has the correct type, has full health, and a full
+	 * move set
+	 */
 	@Test
 	public void testInitialization()
 	{		
@@ -50,6 +66,10 @@ public class TestPokemon {
 		assertFalse(p.hasNext());
 	}
 	
+	/**
+	 * Esnures a pokemon can set its state correctly and can transition
+	 * to the appropriate states
+	 */
 	@Test
 	public void testSetCurrentState()
 	{
@@ -62,6 +82,10 @@ public class TestPokemon {
 		assertTrue(p.getCurrentState() instanceof FaintedState);
 	}
 	
+	/**
+	 * Ensures the iterator for the pokemons moveset operates correctly
+	 * and does not go out of bounds
+	 */
 	@Test
 	public void testIterator()
 	{
@@ -76,6 +100,10 @@ public class TestPokemon {
 		assertFalse(p.hasNext());
 	}
 	
+	/**
+	 * Tests the correct damage is done when two pokemon of the same
+	 * type attack each other
+	 */
 	@Test
 	public void testAttackSameType()
 	{
@@ -91,6 +119,10 @@ public class TestPokemon {
 		assertTrue(p1.getCurrentState() instanceof DamagedState);
 	}
 	
+	/**
+	 * tests the correct damage is done when two pokemon of different 
+	 * types attack each other
+	 */
 	@Test
 	public void testAttackDifferentType()
 	{
