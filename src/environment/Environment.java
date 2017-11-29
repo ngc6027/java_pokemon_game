@@ -63,9 +63,8 @@ public class Environment implements Observer, Iterator {
 
 	public void assignPokemon(int index)
 	{		
-		this.players.get(turn).addPokemon(this.pokemon.get(index));	
-		
-		this.timer.update();
+			this.players.get(turn).addPokemon(this.pokemon.get(index));	
+			this.timer.update();
 	}
 	
 	@Override

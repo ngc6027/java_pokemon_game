@@ -1,6 +1,7 @@
 package commands;
 
 import environment.*;
+import lifeform.Player;
 
 public class SelectPokemonCommand extends Command{
 	
@@ -20,7 +21,10 @@ public class SelectPokemonCommand extends Command{
 	
 	public void setPokemon(int pokemonNum)
 	{
-		this.pokemonNum = pokemonNum;
+
+			this.pokemonNum = pokemonNum;
+
+		
 	}
 
 }
