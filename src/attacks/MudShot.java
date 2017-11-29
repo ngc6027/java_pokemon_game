@@ -1,17 +1,18 @@
 package attacks;
 
+/**
+ * Tier II Attack "Mud Shot".
+ * 
+ * @author Michael Foreman
+ */
 public class MudShot extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 3.0;
-	}
-
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return "Mud Shot";
+	/**
+	 * Instantiates a Tier II attack, Mud Shot.
+	 */
+	public MudShot()
+	{
+		super(1, "Mud Shot");
 	}
 
 }

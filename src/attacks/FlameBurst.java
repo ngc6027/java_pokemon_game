@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier III Attack "Flame Burst".
+ * 
+ * @author Michael Foreman
+ */
 public class FlameBurst extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 3.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Flame Burst";
+	/**
+	 * Instantiates a Tier III attack, Flame Burst.
+	 */
+	public FlameBurst()
+	{
+		super(2, "Flame Burst");
 	}
 
 }

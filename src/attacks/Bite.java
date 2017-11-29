@@ -1,16 +1,17 @@
 package attacks;
 
+/**
+ * Tier II Attack "Bite".
+ * 
+ * @author Michael Foreman
+ */
 public class Bite extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 2.0;
+	/**
+	 * Instantiates a Tier II attack, Bite.
+	 */
+	public Bite()
+	{
+		super(1, "Bite");
 	}
-
-	@Override
-	public String getDescription() {
-		return "Bite";
-	}
-
 }

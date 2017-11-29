@@ -1,16 +1,17 @@
 package attacks;
 
+/**
+ * Tier V Attack "Body Slam".
+ * 
+ * @author Michael Foreman
+ */
 public class BodySlam extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 5.0;
+	/**
+	 * Instantiates a Tier V attack, Body Slam.
+	 */
+	public BodySlam()
+	{
+		super(4, "Body Slam");
 	}
-
-	@Override
-	public String getDescription() {
-		return "Body Slam";
-	}
-
 }

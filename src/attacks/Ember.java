@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier II Attack "Ember".
+ * 
+ * @author Michael Foreman
+ */
 public class Ember extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 2.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Ember";
+	/**
+	 * Instantiates a Tier II attack, Ember.
+	 */
+	public Ember()
+	{
+		super(1, "Ember");
 	}
 
 }

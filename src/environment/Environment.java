@@ -25,7 +25,9 @@ public class Environment implements Observer, Iterator {
 	{
 		this.players = new ArrayList<Player>();
 		createAllPlayers();
+		
 		this.turn = 0;
+		
 		this.pokemon = new ArrayList<Pokemon>();
 		createAllPokemon();
 		
@@ -61,12 +63,6 @@ public class Environment implements Observer, Iterator {
 		return uniqueInstance;
 	}
 
-	public void assignPokemon(int index)
-	{		
-			this.players.get(turn).addPokemon(this.pokemon.get(index));	
-			this.timer.update();
-	}
-	
 	@Override
 	public void updateTurn(int turn) {
 		this.turn = turn;
@@ -98,19 +94,21 @@ public class Environment implements Observer, Iterator {
 	{
 		this.players.add(new Player(0));
 		this.players.add(new Player(1));
+		
+		this.players.get(0).setOpponent(this.players.get(1));
+		this.players.get(1).setOpponent(this.players.get(0));
 	}
 	
 	public Pokemon getPokemon(int index)
 	{
+		Pokemon rc = null;
+		
 		if(pokemon.get(index) != null)
 		{
-			return pokemon.get(index);
+			rc = pokemon.get(index);
 		}
-		else
-		{
-			return null;
-		}
-///////////////////////////////////added the return null here to check something		
+		
+		return rc;		
 	}
 	
 	public void resetGame()
@@ -124,7 +122,11 @@ public class Environment implements Observer, Iterator {
 		{
 			timer.update();
 		}
-		//give all pokemon full health
+		
+		for(int i = 0; i < pokemon.size(); i++)
+		{
+			pokemon.get(i).resetGame();
+		}
 	}
 	
 	public boolean hasNext()
@@ -171,4 +173,39 @@ public class Environment implements Observer, Iterator {
 		return players.get(index);
 	}
 	
+	/* ******************************************************************************
+	 *                        Commands for Command Pattern                          *
+	 * ******************************************************************************/
+	
+	public void assignPokemon(int index)
+	{		
+		this.players.get(turn).addPokemon(this.pokemon.get(index));	
+		
+		this.timer.update();
+	}
+	
+	public void attack(int attackNum, int turn)
+	{
+		if(turn == this.turn)
+		{
+			this.players.get(turn).attack(attackNum);
+			this.timer.update();
+		}
+	}
+	
+	public void changeActivePokemon(int pokemonNum, int turn)
+	{
+		boolean success = false;
+		
+		if(turn == this.turn)
+		{
+			success = this.players.get(turn).changeActivePokemon(pokemonNum);
+		}
+		
+		if(success)
+		{
+			this.timer.update();
+		}
+		
+	}
 }

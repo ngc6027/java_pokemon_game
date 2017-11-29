@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier IV Attack "Power Whip".
+ * 
+ * @author Michael Foreman
+ */
 public class PowerWhip extends Attack{
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 2.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Power Whip";
+	/**
+	 * Instantiates a Tier IV attack, Power Whip.
+	 */
+	public PowerWhip()
+	{
+		super(3, "Power Whip");
 	}
 
 }

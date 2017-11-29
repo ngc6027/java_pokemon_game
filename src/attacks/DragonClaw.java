@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier IV Attack "Dragon Claw".
+ * 
+ * @author Michael Foreman
+ */
 public class DragonClaw extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 5.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Dragon Claw";
+	/**
+	 * Instantiates a Tier IV attack, Dragon Claw.
+	 */
+	public DragonClaw()
+	{
+		super(3, "Dragon Claw");
 	}
 
 }

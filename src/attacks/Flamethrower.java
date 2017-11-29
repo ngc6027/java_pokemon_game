@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier VI Attack "Flamethrower".
+ * 
+ * @author Michael Foreman
+ */
 public class Flamethrower extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 4.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Flamethrower";
+	/**
+	 * Instantiates a Tier VI attack, Flamethrower.
+	 */
+	public Flamethrower()
+	{
+		super(5, "Flamethrower");
 	}
 
 }

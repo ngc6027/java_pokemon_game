@@ -11,8 +11,8 @@ public class Vulpix extends Pokemon {
 		
 		this.attacks.add(new Ember());
 		this.attacks.add(new FlameBurst());
-		this.attacks.add(new Flamethrower());
 		this.attacks.add(new HeatWave());
+		this.attacks.add(new Flamethrower());
 		
 	}
 }

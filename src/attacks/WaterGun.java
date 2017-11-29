@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier III Attack "Water Gun".
+ * 
+ * @author Michael Foreman
+ */
 public class WaterGun extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 3.0;
+	/**
+	 * Instantiates a Tier III attack, Water Gun.
+	 */
+	public WaterGun()
+	{
+		super(2, "Water Gun");
 	}
-
-	@Override
-	public String getDescription() {
-		return "Water Gun";
-	}
-
+	
 }

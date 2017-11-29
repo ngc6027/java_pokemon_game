@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier I Attack "Tackle".
+ * 
+ * @author Michael Foreman
+ */
 public class Tackle extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 1.0;
+	/**
+	 * Instantiates a Tier I attack, Tackle.
+	 */
+	public Tackle()
+	{
+		super(0, "Tackle");
 	}
-
-	@Override
-	public String getDescription() {
-		return "Tackle";
-	}
-
+	
 }

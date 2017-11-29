@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier I Attack "Scratch".
+ * 
+ * @author Michael Foreman
+ */
 public class Scratch extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 1.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Scratch";
+	/**
+	 * Instantiates a Tier I attack, Scratch.
+	 */
+	public Scratch()
+	{
+		super(0, "Scratch");
 	}
 
 }

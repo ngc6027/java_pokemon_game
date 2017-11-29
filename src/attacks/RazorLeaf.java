@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier II Attack "Razor Leaf".
+ * 
+ * @author Michael Foreman
+ */
 public class RazorLeaf extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Razor Leaf";
+	/**
+	 * Instantiates a Tier II attack, Razor Leaf.
+	 */
+	public RazorLeaf()
+	{
+		super(1, "Razor Leaf");
 	}
 
 }

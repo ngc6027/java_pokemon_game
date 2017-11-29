@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier VI Attack "Flash Cannon".
+ * 
+ * @author Michael Foreman
+ */
 public class FlashCannon extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 5.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Flash Cannon";
+	/**
+	 * Instantiates a Tier VI attack, Flash Cannon.
+	 */
+	public FlashCannon()
+	{
+		super(5, "Flash Cannon");
 	}
 
 }

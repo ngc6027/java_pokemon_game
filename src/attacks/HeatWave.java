@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier IV Attack "Heat Wave".
+ * 
+ * @author Michael Foreman
+ */
 public class HeatWave extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 3.0;
+	/**
+	 * Instantiates a Tier IV attack, Heat Wave.
+	 */
+	public HeatWave()
+	{
+		super(3, "Heat Wave");
 	}
-
-	@Override
-	public String getDescription() {
-		return "Heat Wave";
-	}
-
+	
 }

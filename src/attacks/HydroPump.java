@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier V Attack "Hydro Pump".
+ * 
+ * @author Michael Foreman
+ */
 public class HydroPump extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 4.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Hydro Pump";
+	/**
+	 * Instantiates a Tier V attack, Hydro Pump.
+	 */
+	public HydroPump()
+	{
+		super(4, "Hydro Pump");
 	}
 
 }

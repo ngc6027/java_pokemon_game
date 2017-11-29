@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier I Attack "Bubble".
+ * 
+ * @author Michael Foreman
+ */
 public class Bubble extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 2.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Bubble";
+	/**
+	 * Instantiates a Tier I attack, Bubble.
+	 */
+	public Bubble()
+	{
+		super(0, "Bubble");
 	}
 
 }

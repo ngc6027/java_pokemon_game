@@ -74,13 +74,44 @@ public class TestPlayer {
 		Player p2 = new Player(1);
 		
 		p1.setOpponent(p2);
+		p2.setOpponent(p1);
+		
 		p1.addPokemon(new Bulbasaur());
-		p1.addPokemon(new Vulpix());
+		p2.addPokemon(new Vulpix());
+		
+		p1.changeActivePokemon(0);
+		p2.changeActivePokemon(0);
 		
 		p1.resetGame();
 		
 		assertEquals(0, p1.getNumPokemon());
-		assertNull(p1.getOpponent());
+		assertEquals(0, p2.getNumPokemon());
+		
+		assertNull(p1.getActivePokemon());
+		assertNull(p2.getActivePokemon());
+		
+		assertEquals(p2, p1.getOpponent());
+		assertEquals(p1, p2.getOpponent());
+		
+	}
+	
+	@Test
+	public void testAttack()
+	{
+		Player p1 = new Player(0);
+		Player p2 = new Player(1);
+		
+		p1.setOpponent(p2);
+		p2.setOpponent(p1);
+		
+		p1.addPokemon(new Ivysaur());
+		p2.addPokemon(new Charizard());
+		
+		p1.changeActivePokemon(0);
+		p2.changeActivePokemon(0);
+		
+		p1.attack(3);
+		assertEquals(90, p2.getActivePokemon().getCurrentHealth());
 		
 	}
 	

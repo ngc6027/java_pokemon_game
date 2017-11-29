@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier III Attack "Vine Whip".
+ * 
+ * @author Michael Foreman
+ */
 public class VineWhip extends Attack{
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 4.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Vine Whip";
+	/**
+	 * Instantiates a Tier III attack, Vine Whip.
+	 */
+	public VineWhip()
+	{
+		super(2, "Vine Whip");
 	}
 
 }

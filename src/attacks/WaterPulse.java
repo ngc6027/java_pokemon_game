@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier IV Attack "Water Pulse".
+ * 
+ * @author Michael Foreman
+ */
 public class WaterPulse extends Attack {
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 3.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Water Pulse";
+	/**
+	 * Instantiates a Tier IV attack, Water Pulse.
+	 */
+	public WaterPulse()
+	{
+		super(3, "Water Pulse");
 	}
 
 }

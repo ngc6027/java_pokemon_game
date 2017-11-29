@@ -1,16 +1,18 @@
 package attacks;
 
+/**
+ * Tier V Attack "Aqua Jet".
+ * 
+ * @author Michael Foreman
+ */
 public class SludgeBomb extends Attack{
 
-	@Override
-	public double calculateDamage() {
-		// TODO Auto-generated method stub
-		return 3.0;
-	}
-
-	@Override
-	public String getDescription() {
-		return "Sludge Bomb";
+	/**
+	 * Instantiates a Tier V attack, Aqua Jet.
+	 */
+	public SludgeBomb()
+	{
+		super(4, "Sludge Bomb");
 	}
 
 }
