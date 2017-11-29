@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 import environment.*;
@@ -121,10 +122,18 @@ public class ConfirmGUI extends JFrame implements ActionListener
 	{
 			if(e.getSource() == ok)
 			{
+				try {
+					new BattleGUI();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				setVisible(false);
 				//open up the final screen for the battle 
 				//new BattleGUI();
 			}
+			
 	}
 	
 }

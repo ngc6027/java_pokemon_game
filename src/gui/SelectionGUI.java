@@ -120,6 +120,7 @@ public SelectionGUI() throws IOException
 		pokemonCount++;
 	}
 	
+	
 	//pack sizes to fit
 	pack();
 	
@@ -215,6 +216,7 @@ public void actionPerformed(ActionEvent e)
 			{
 				System.out.println("Six Pokemon Selected!");
 				new ConfirmGUI();
+				
 				this.setVisible(false);
 			}
 			System.out.println("Turn is now " + turn);
