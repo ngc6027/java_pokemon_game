@@ -5,8 +5,16 @@ import org.junit.Test;
 
 import lifeform.*;
 
+/**
+ * Test class for the gameplay timer 
+ * @author jb7656
+ *
+ */
 public class TestTimer {
 
+	/**
+	 * Verifies that observers can be registered to the timers list
+	 */
 	@Test
 	public void testAddObservers()
 	{
@@ -26,6 +34,10 @@ public class TestTimer {
 		assertEquals(2, t.getNumObservers());
 	}
 	
+	/**
+	 * Verifies that observers added to the timer are notified 
+	 * when the round is updated in timer
+	 */
 	@Test
 	public void testNotifyObservers()
 	{
@@ -49,6 +61,10 @@ public class TestTimer {
 		
 	}
 	
+	/**
+	 * Verifies oberservers can be removed from the timers list
+	 * and will no longer be notified on an update
+	 */
 	@Test
 	public void testRemoveObservers()
 	{
