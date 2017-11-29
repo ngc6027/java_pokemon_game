@@ -27,6 +27,8 @@ public class BattleGUI extends JFrame implements ActionListener
 	JButton playerTwoImage;
 	JProgressBar playerOneHealth;
 	JProgressBar playerTwoHealth;
+	
+	JButton images[];
 
 	public BattleGUI() throws IOException
 	{
@@ -36,6 +38,7 @@ public class BattleGUI extends JFrame implements ActionListener
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(700,700);
+		images = new JButton[2];
 		//build gutss
 		guts();
 		//creatingBattle();
@@ -44,15 +47,44 @@ public class BattleGUI extends JFrame implements ActionListener
 	
 	void guts() throws IOException
 	{
+		
+		
+		
+		
 		mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setBackground(Color.darkGray);
 		mainPanel.setLayout(new GridLayout(3,2));
 		
-		playerOne = new JPanel(new GridLayout(1,2));
+		playerOne = new JPanel();
 		Pokemon pokemon1  = e.getPlayer(1).getPokemon(0);
-		playerTwo = new JPanel(new GridLayout(1,2));
+		playerTwo = new JPanel();
 		Pokemon pokemon0  = e.getPlayer(0).getPokemon(0);
-		attacks = new JPanel(new GridLayout(2,2));
+		attacks = new JPanel();
+		
+		
+		
+		
+		ImageIcon start0 = e.getPokemonImage(pokemon0.getDescription());	
+
+		//resize image here
+		Image image0 = start0.getImage(); // transform it 
+		Image newimg0 = image0.getScaledInstance(190, 109,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		start0 = new ImageIcon(newimg0);  // transform it back
+		
+		ImageIcon start1 = e.getPokemonImage(pokemon1.getDescription());	
+
+		//resize image heres
+		Image image1 = start1.getImage(); // transform it 
+		Image newimg1 = image1.getScaledInstance(190, 109,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		start1 = new ImageIcon(newimg1);  // transform it back
+		
+		
+		images[0] = new JButton (start0);
+		
+		//playerOne.add(images[0]);
+		images[1] = new JButton (start1);
+		
+		//playerTwo.add(images[1]);
 //		
 //		
 		playerOneHealth = new JProgressBar(0, pokemon0.getCurrentHealth());
@@ -62,15 +94,25 @@ public class BattleGUI extends JFrame implements ActionListener
 		playerOneStats = playerOneHealth;
 		mainPanel.add(playerOne.add(playerOneStats));
 		
+		mainPanel.add(images[0]);
+		
 		playerTwoHealth = new JProgressBar(0, pokemon1.getCurrentHealth());
 		playerTwoHealth.setValue(pokemon1.getCurrentHealth());
 		playerTwoHealth.setStringPainted(true);
 //		
 		playerTwoStats = playerTwoHealth;
 		mainPanel.add(playerTwo.add(playerTwoStats));
+		
+		mainPanel.add(images[1]);
 
-		
-		
+		mainPanel.add(new JButton("taco"));
+		while(pokemon0.hasNext())
+		{
+			//attacks.setLayout(new GridLayout(2,2));
+			JButton attack = new JButton(pokemon0.next().getDescription());
+			//attack.setFont(font);
+			mainPanel.add(attack);
+		}
 		ImageIcon start = e.getPokemonImage(pokemon0.getDescription());	
 		Image newimg = start.getImage();
 		start = new ImageIcon(newimg); 
@@ -133,9 +175,9 @@ public class BattleGUI extends JFrame implements ActionListener
 	
 	public void creatingBattle() throws IOException
 	{
-		playerOne = new JPanel(new GridLayout(1,2));
+		playerOne = new JPanel(new GridLayout(2,1));
 		Pokemon pokemon1  = e.getPlayer(1).getPokemon(0);
-		playerTwo = new JPanel(new GridLayout(1,2));
+		playerTwo = new JPanel(new GridLayout(2,1));
 		Pokemon pokemon0  = e.getPlayer(0).getPokemon(0);
 		attacks = new JPanel(new GridLayout(2,2));
 //		
