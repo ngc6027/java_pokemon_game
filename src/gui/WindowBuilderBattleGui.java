@@ -36,10 +36,10 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	JButton attackButton;
 	
 	private JLabel ourPokemonLabel;
-	Player playerOne;
-	Pokemon playerOneCurrentPokemon;
-	JButton playerOneImage;
-	JProgressBar playerTwoHealth;
+	private Player playerOne;
+	private Pokemon playerOneCurrentPokemon;
+	private JButton playerOneImage;
+	private JProgressBar playerTwoHealth;
 	
 	
 	private JLabel opPokemonLabel;
@@ -92,7 +92,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		//the pane that holds all of the info for the opponant pokemon
 		opponentInfo = new JPanel();
 		mainPanel.add(opponentInfo);
-		opponentInfo.setLayout(new GridLayout(2, 1, 0, 0));
+		opponentInfo.setLayout(new GridLayout(3, 1, 0, 0));
 		oppInfoPane();
 		
 		//set up the opponant panel that contains their pokemon pic
@@ -110,16 +110,17 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		//the pane that holds all of the info for our pokemon
 		ourInfo = new JPanel();
 		mainPanel.add(ourInfo);
-		ourInfo.setLayout(new GridLayout(2, 1, 0, 0));
+		ourInfo.setLayout(new GridLayout(3, 1, 0, 0));
 		ourInfoPane();
 		
+		//dynamic
 		panel_5 = new JPanel();
-		panel_5.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.BLACK, null));
+		panel_5.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 0), Color.BLACK));
 		mainPanel.add(panel_5);
 		
-		
+		//pane that holds the options at start of turn
 		interactionPane = new JPanel();
-		interactionPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 0), null));
+		interactionPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 0), Color.BLACK));
 		mainPanel.add(interactionPane);
 		interactionPane.setLayout(new GridLayout(2, 2, 0, 0));
 		interactionPane();
@@ -128,24 +129,27 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	
 	void oppInfoPane()
 	{
-		opPokemonLabel = new JLabel("OPPONENT POKEMON NAME");
+		//grab the name
+		String name = playerTwoCurrentPokemon.getDescription();
+		opPokemonLabel = new JLabel(name);
 		opPokemonLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		opponentInfo.add(opPokemonLabel);
-		
+		//grab the health and set it
 		playerTwoHealth = new JProgressBar(0, 100);
-		playerTwoHealth.setStringPainted(true);
 		playerTwoHealth.setValue(playerTwoCurrentPokemon.getCurrentHealth());
 		opponentInfo.add(playerTwoHealth);
 	}
 	
 	void ourInfoPane()
 	{
-		ourPokemonLabel = new JLabel("OUR POKEMON NAME");
+		//grab the name
+		String name = playerOneCurrentPokemon.getDescription();
+		ourInfo.add(new JLabel(""));
+		ourPokemonLabel = new JLabel(name);
 		ourPokemonLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ourInfo.add(ourPokemonLabel);
-		
+		//grab the health and set it
 		playerOneHealth = new JProgressBar(0,100);
-		playerOneHealth.setStringPainted(true);
 		playerOneHealth.setValue(playerOneCurrentPokemon.getCurrentHealth());
 		ourInfo.add(playerOneHealth);
 	}
