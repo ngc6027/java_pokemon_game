@@ -59,7 +59,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	private JProgressBar playerOneHealth;
 
 	//i forget what these are
-	private JButton opponantPic;
+	private JButton opponentPicture;
 	private JButton ourImage;
 	
 	//For choosing pokemon
@@ -68,8 +68,18 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	private JButton pokeChoiceTwo;
 	private JButton pokeChoiceThree;
 	int dynamicOption = 0;
+	private JLabel bigHpLabel;
+	private JLabel lblNewLabel;
 
-	
+	private JLabel pickAttackLabel;
+	private JButton attack1;
+	private JButton attack2;
+	private JButton attack3;
+	private JButton attack4;
+	private JButton attackChoiceOne;
+	private JButton attackChoiceTwo;
+	private JButton attackChoiceThree;
+	private JButton attackChoiceFour;
 
 	
 	/**
@@ -134,7 +144,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		ourInfo = new JPanel();
 		ourInfo.setBackground(Color.GREEN);
 		mainPanel.add(ourInfo);
-		ourInfo.setLayout(new GridLayout(3, 1, 0, 0));
+		ourInfo.setLayout(new GridLayout(4, 1, 0, 0));
 		ourInfoPane();
 		
 		//dynamic Pane that shows what is currently needed
@@ -156,6 +166,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	
 	void oppInfoPane()
 	{
+		opponentInfo.removeAll();
+		
 		//grab the name
 		String name = playerTwoCurrentPokemon.getDescription();
 		opPokemonLabel = new JLabel(name);
@@ -166,6 +178,9 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		playerTwoHealth = new JProgressBar(0, 100);
 		playerTwoHealth.setValue(playerTwoCurrentPokemon.getCurrentHealth());
 		opponentInfo.add(playerTwoHealth);
+		
+		opponentInfo.revalidate();
+		opponentInfo.repaint();
 	}
 	
 	
@@ -176,15 +191,24 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		//grab the name
 		String name = playerOneCurrentPokemon.getDescription();
 		
-		ourInfo.add(new JLabel(""));
+		lblNewLabel = new JLabel("");
+		ourInfo.add(lblNewLabel);
 		ourPokemonLabel = new JLabel(name);
 		ourPokemonLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		ourPokemonLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ourInfo.add(ourPokemonLabel);
-		//grab the health and set it
+		
+		//set the health bar
 		playerOneHealth = new JProgressBar(0,100);
 		playerOneHealth.setValue(playerOneCurrentPokemon.getCurrentHealth());
 		ourInfo.add(playerOneHealth);
+		
+		//have a number version health
+		String health = playerOneCurrentPokemon.getCurrentHealth() + " / 100";
+		bigHpLabel = new JLabel(health);
+		bigHpLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		bigHpLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		ourInfo.add(bigHpLabel);
 		
 		ourInfo.revalidate();
 		ourInfo.repaint();
@@ -202,8 +226,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		Image newimg0 = image0.getScaledInstance(190, 109,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		oppImage = new ImageIcon(newimg0);  // transform it back
 
-		opponantPic = new JButton(oppImage);
-		opponentPic.add(opponantPic);
+		opponentPicture = new JButton(oppImage);
+		opponentPic.add(opponentPicture);
 	}
 	
 	
@@ -257,7 +281,60 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				pokeChoiceThree.addActionListener(this);
 				dynamicPanel.add(pokeChoiceThree);
 				
+				break;
 		    }
+			
+			case 3:
+			{
+				int i = 5;
+				
+				JButton attack;
+				 
+				while(playerOneCurrentPokemon.hasNext())
+				{
+					attack = new JButton(playerOneCurrentPokemon.next().getDescription());
+				
+					
+					i++;
+					
+					
+					
+					switch(i)
+					{
+					case 5:
+						
+						attackChoiceOne = attack;
+						attackChoiceOne.addActionListener(this);
+						dynamicPanel.add(attackChoiceOne);
+						
+						break;
+					case 6:
+						
+						attackChoiceTwo = attack;
+						attackChoiceTwo.addActionListener(this);
+						dynamicPanel.add(attackChoiceTwo);
+						
+						break;
+					case 7:
+						
+						attackChoiceThree = attack;
+						attackChoiceThree.addActionListener(this);
+						dynamicPanel.add(attackChoiceThree);
+						
+						break;
+					case 8:
+						
+						attackChoiceFour = attack;
+						attackChoiceFour.addActionListener(this);
+						dynamicPanel.add(attackChoiceFour);
+						break;
+					default:
+						break;
+					
+					}
+				}
+			}
+			
 			default:
 				break;
 		}
@@ -297,6 +374,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		// MAIN BUTTON CHOICES
 		if (e.getSource() == attackButton)
 		{
+			dynamicOption = 3;
+			dynamicPane();
 			
 		}
 		if (e.getSource() == runButton)
@@ -362,6 +441,34 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				e1.printStackTrace();
 			}
 		}
+		
+		
+		//ATTACK BUTTONS
+		if(e.getSource() == attackChoiceOne)
+		{
+			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 0);
+			oppInfoPane();
+		}
+		
+		if(e.getSource() == attackChoiceTwo)
+		{
+			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 1);
+			oppInfoPane();
+		}
+		
+		if(e.getSource() == attackChoiceThree)
+		{
+			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 2);
+			oppInfoPane();
+		}
+		
+		if(e.getSource() == attackChoiceFour)
+		{
+			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 3);
+			oppInfoPane();
+		}
+		
+		
 		
 	}
 

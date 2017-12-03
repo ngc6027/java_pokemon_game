@@ -1,35 +1,93 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GridLayout;
-import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+
+import environment.Environment;
+import lifeform.Player;
+import lifeform.Pokemon;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.awt.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
-import javax.swing.*;
-
-import environment.Environment;
-import lifeform.Pokemon;
-
+/**
+ * @author derekgrove
+ *
+ */
 public class BattleGUI extends JFrame implements ActionListener
 {
+	//setup
 	Environment e;
-	JPanel mainPanel;
-	JPanel playerOne;
-	JPanel playerTwo;
-	JPanel attacks;
-	JProgressBar playerOneStats;
-	JButton playerOneImage;
-	JProgressBar playerTwoStats;
-	JButton playerTwoImage;
-	JProgressBar playerOneHealth;
-	JProgressBar playerTwoHealth;
 	
-	JButton images[];
+	
+	//panel and button setup
+	JPanel mainPanel;
+	JPanel interactionPane;
+	JPanel opponentInfo;
+	JPanel ourInfo;
+	JPanel opponentPic;
+	JPanel ourPic;
+	JPanel dynamicPanel;
+	
+	JButton runButton;
+	JButton attackButton;
+	JButton pokemonButton;
+	JButton bagButton;
+	
+	
+	//current player setup
+	private JLabel ourPokemonLabel;
+	private Player playerOne;
+	private Pokemon playerOneCurrentPokemon;
+	private JButton playerOneImage;
+	private JProgressBar playerTwoHealth;
+	
+	//opposite player setup
+	private JLabel opPokemonLabel;
+	private Player playerTwo;
+	private Pokemon playerTwoCurrentPokemon;
+	private JButton playerTwoImage;
+	private JProgressBar playerOneHealth;
 
+	//i forget what these are
+	private JButton opponantPic;
+	private JButton ourImage;
+	
+	//For choosing pokemon
+	private JLabel pickPokeLabel;
+	private JButton pokeChoiceOne;
+	private JButton pokeChoiceTwo;
+	private JButton pokeChoiceThree;
+	
+	private JLabel pickAttackLabel;
+	private JButton attack1;
+	private JButton attack2;
+	private JButton attack3;
+	private JButton attack4;
+	private JButton attackChoiceOne;
+	private JButton attackChoiceTwo;
+	private JButton attackChoiceThree;
+	private JButton attackChoiceFour;
+	
+	
+	int dynamicOption = 0;
+
+	
+
+	
+	/**
+	 * @throws IOException
+	 */
 	public BattleGUI() throws IOException
 	{
 		//setup
@@ -37,182 +95,378 @@ public class BattleGUI extends JFrame implements ActionListener
 		this.e = Environment.getEnvironment();
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(700,700);
-		images = new JButton[2];
-		//build gutss
-		guts();
-		//creatingBattle();
+		setSize(400,400);
 		
+		//get players
+	    playerOne = e.getPlayer(0);
+		playerTwo = e.getPlayer(1);
+
+		//get their starting pokemon 		//GET ACTIVE THROWS ISSUES HERE IDK
+		playerOneCurrentPokemon = playerOne.getPokemon(0);
+		playerTwoCurrentPokemon = playerTwo.getPokemon(0);
+		
+		//build guts
+		init();
+	}
+
+	
+	/**
+	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 */
+	private void init() throws IOException
+	{
+		//main overall panel
+		mainPanel = new JPanel();
+		mainPanel.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, null, null));
+		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
+		mainPanel.setLayout(new GridLayout(3, 2, 0, 0));
+		
+
+		
+		
+		//the pane that holds all of the info for the opponant pokemon
+		opponentInfo = new JPanel();
+		opponentInfo.setBackground(Color.GREEN);
+		mainPanel.add(opponentInfo);
+		opponentInfo.setLayout(new GridLayout(3, 1, 0, 0));
+		oppInfoPane();
+		
+		
+		//set up the opponant panel that contains their pokemon pic
+		opponentPic = new JPanel();
+		opponentPic.setBackground(Color.GREEN);
+		mainPanel.add(opponentPic);
+		opponentPic.setLayout(new GridLayout(0, 1, 0, 0));
+		opponentPicPane();
+		
+		//set up current player panel that contains our pokemon pic
+		ourPic = new JPanel();
+		ourPic.setBackground(Color.GREEN);
+		mainPanel.add(ourPic);
+		ourPic.setLayout(new GridLayout(1, 0, 0, 0));
+		ourPicPane();
+		
+		//the pane that holds all of the info for our pokemon
+		ourInfo = new JPanel();
+		ourInfo.setBackground(Color.GREEN);
+		mainPanel.add(ourInfo);
+		ourInfo.setLayout(new GridLayout(3, 1, 0, 0));
+		ourInfoPane();
+		
+		//dynamic Pane that shows what is currently needed
+		dynamicPanel = new JPanel();
+		dynamicPanel.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 0), Color.BLACK));
+		mainPanel.add(dynamicPanel);
+		dynamicPanel.setLayout(new GridLayout(4, 1, 0, 0));
+		dynamicPane();
+		
+		
+		//pane that holds the options at start of turn
+		interactionPane = new JPanel();
+		interactionPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 0), Color.BLACK));
+		mainPanel.add(interactionPane);
+		interactionPane.setLayout(new GridLayout(2, 2, 0, 0));
+		interactionPane();
 	}
 	
-	void guts() throws IOException
-	{
-		
-		
-		
-		
-		mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setBackground(Color.darkGray);
-		mainPanel.setLayout(new GridLayout(3,2));
-		
-		playerOne = new JPanel();
-		Pokemon pokemon1  = e.getPlayer(1).getPokemon(0);
-		playerTwo = new JPanel();
-		Pokemon pokemon0  = e.getPlayer(0).getPokemon(0);
-		attacks = new JPanel();
-		
-		
-		
 	
-		ImageIcon start0 = e.getPokemonImage(pokemon0.getDescription());	
+	void oppInfoPane()
+	{
+		opponentInfo.removeAll();
+		
+		//grab the name
+		String name = playerTwoCurrentPokemon.getDescription();
+		opPokemonLabel = new JLabel(name);
+		opPokemonLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		opPokemonLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		opponentInfo.add(opPokemonLabel);
+		//grab the health and set it
+		playerTwoHealth = new JProgressBar(0, 100);
+		playerTwoHealth.setValue(playerTwoCurrentPokemon.getCurrentHealth());
+		opponentInfo.add(playerTwoHealth);
+		
+		opponentInfo.revalidate();
+		opponentInfo.repaint();
+	}
+	
+	
+	void ourInfoPane()
+	{
+		ourInfo.removeAll();
+		
+		//grab the name
+		String name = playerOneCurrentPokemon.getDescription();
+		
+		ourInfo.add(new JLabel(""));
+		ourPokemonLabel = new JLabel(name);
+		ourPokemonLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		ourPokemonLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		ourInfo.add(ourPokemonLabel);
+		//grab the health and set it
+		playerOneHealth = new JProgressBar(0,100);
+		playerOneHealth.setValue(playerOneCurrentPokemon.getCurrentHealth());
+		ourInfo.add(playerOneHealth);
+		
+		ourInfo.revalidate();
+		ourInfo.repaint();
+	}
+	
+	
+	void opponentPicPane() throws IOException
+	{
+		//get image for opponents current pokemon
+		ImageIcon oppImage;
+		oppImage = e.getPokemonImage(playerTwoCurrentPokemon.getDescription());	
 
 		//resize image here
-		Image image0 = start0.getImage(); // transform it 
+		Image image0 = oppImage.getImage(); // transform it 
 		Image newimg0 = image0.getScaledInstance(190, 109,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		start0 = new ImageIcon(newimg0);  // transform it back
+		oppImage = new ImageIcon(newimg0);  // transform it back
+
+		opponantPic = new JButton(oppImage);
+		opponentPic.add(opponantPic);
+	}
 	
-		ImageIcon start1 = e.getPokemonImage(pokemon1.getDescription());	
+	
+	void ourPicPane() throws IOException
+	{
+		ourPic.removeAll();
+		
+		ImageIcon usImage = e.getPokemonImage(playerOneCurrentPokemon.getDescription());	
 
 		//resize image heres
-		Image image1 = start1.getImage(); // transform it 
+		Image image1 = usImage.getImage(); // transform it 
 		Image newimg1 = image1.getScaledInstance(190, 109,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		start1 = new ImageIcon(newimg1);  // transform it back
-		
-		
-		images[0] = new JButton (start0);
-		
-		//playerOne.add(images[0]);
-		images[1] = new JButton (start1);
-		
-		//playerTwo.add(images[1]);
-//		
-/////////////////////////////		
-		playerOneHealth = new JProgressBar(0, pokemon0.getCurrentHealth());
-		playerOneHealth.setValue(pokemon0.getCurrentHealth());
-		playerOneHealth.setStringPainted(true);
-//		
-		playerOneStats = playerOneHealth;
-		mainPanel.add(playerOne.add(playerOneStats));
-		
-		mainPanel.add(images[0]);
-		
-		playerTwoHealth = new JProgressBar(0, pokemon1.getCurrentHealth());
-		playerTwoHealth.setValue(pokemon1.getCurrentHealth());
-		playerTwoHealth.setStringPainted(true);
-//		
-		playerTwoStats = playerTwoHealth;
-		mainPanel.add(playerTwo.add(playerTwoStats));
-		
-		mainPanel.add(images[1]);
+		usImage = new ImageIcon(newimg1);  // transform it back
 
-		mainPanel.add(new JButton("taco"));
-		while(pokemon0.hasNext())
-		{
-			//attacks.setLayout(new GridLayout(2,2));
-			JButton attack = new JButton(pokemon0.next().getDescription());
-			//attack.setFont(font);
-			mainPanel.add(attack);
-		}
-		ImageIcon start = e.getPokemonImage(pokemon0.getDescription());	
-		Image newimg = start.getImage();
-		start = new ImageIcon(newimg); 
-	
-//		mainPanel.add(e.getPokemonImage(pokemon0.getDescription()));
+		ourImage = new JButton(usImage);
+		ourPic.add(ourImage);
 		
-		
-		
-//		JPanel
-//		JPanel statsAndHealthPlayer1 = new JPanel();
-//		JPanel imagePanel1 = new JPanel();
-//		JButton images1 = new JButton();
-//		JPanel statsAndHealthPlayer0 = new JPanel();
-//		JPanel image0 = new JPanel();
-//		JPanel attacks = new JPanel();
-//		attacks.setLayout(getLayout());
-//		Pokemon pokemon  = e.getPlayer(1).getActivePokemon();
-//		ImageIcon start = e.getPokemonImage(pokemon.getDescription());	
-//
-//		//resize image here
-//		Image image = start.getImage(); // transform it 
-//		Image newimg = image.getScaledInstance(90, 79,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-//		start = new ImageIcon(newimg);  // transform it back
-//		imagePanel1.add(images1);
-//		
-//		
-//		
-//		mainPanel.add(statsAndHealthPlayer1);
-//		mainPanel.add(imagePanel1);
-//		mainPanel.add(statsAndHealthPlayer0);
-//		mainPanel.add(image0);
-//		mainPanel.add(attacks);
-		this.add(mainPanel);
-		
-		
-		
-//		//gridspot 0 0 = opposite player pokemon info
-//		Pokemon pokemon  = e.getPlayer(1).getActivePokemon();
-//		ImageIcon pokemon1Image = e.getPokemonImage(pokemon.getDescription());
-//		Image image1 = pokemon1Image.getImage();
-//		Image newimg1 = image1.getScaledInstance(90, 79,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-//		pokemon1Image = new ImageIcon(newimg1);  // transform it back
-		
-		
-		//add(pokemon1Image);
-		
-		
-		//gridspot 0 1 = opposite pokemon picture
-		//ImageIcon start = e.getPokemonImage(pokemonImage.getDescription());
-		
-		
-		//gridspot 1 0 = player pokemon
-		//gridspot 1 1 = player pokemon info
-		//e.getPlayer(0).getActivePokemon();
-		
-		//gridspot 2 0 = blank spot that shows text when stuff happens
-		//gridspot 2 1 = Menu options
-		
+		ourPic.revalidate();
+		ourPic.repaint();
 	}
 	
-	public void creatingBattle() throws IOException
+	
+	
+	void dynamicPane()
 	{
-		playerOne = new JPanel(new GridLayout(2,1));
-		Pokemon pokemon1  = e.getPlayer(1).getPokemon(0);
-		playerTwo = new JPanel(new GridLayout(2,1));
-		Pokemon pokemon0  = e.getPlayer(0).getPokemon(0);
-		attacks = new JPanel(new GridLayout(2,2));
-//		
-//	health for 1	?
-		playerOneHealth = new JProgressBar(0, pokemon0.getCurrentHealth());
-		playerOneHealth.setValue(pokemon0.getCurrentHealth());
-		playerOneHealth.setStringPainted(true);
-//		
-		playerOneStats = playerOneHealth;
-		mainPanel.add(playerOneStats);
+		dynamicPanel.removeAll();
 		
 		
-	//health for 2?	
-		playerTwoHealth = new JProgressBar(0, pokemon1.getCurrentHealth());
-		playerTwoHealth.setValue(pokemon1.getCurrentHealth());
-		playerTwoHealth.setStringPainted(true);
-//		
-		playerTwoStats = playerTwoHealth;
-		mainPanel.add(playerTwoStats);
+		//swtich statement decides what to put in the panel dependent on what button was clicked
+		switch(dynamicOption)
+		{
+			case 0:
+				break;
+			case 1:
+			{
+				//Present the choices of pokemon to pick
+				pickPokeLabel = new JLabel("   PICK A POKEMON:");
+				dynamicPanel.add(pickPokeLabel);
+				
+				String pokemonName = playerOne.getPokemon(0).getDescription();
+				pokeChoiceOne = new JButton(pokemonName);
+				pokeChoiceOne.addActionListener(this);
+				dynamicPanel.add(pokeChoiceOne);
+				
+				pokemonName = playerOne.getPokemon(1).getDescription();
+				pokeChoiceTwo = new JButton(pokemonName);
+				pokeChoiceTwo.addActionListener(this);
+				dynamicPanel.add(pokeChoiceTwo);
 		
+				pokemonName = playerOne.getPokemon(2).getDescription();
+				pokeChoiceThree = new JButton(pokemonName);
+				pokeChoiceThree.addActionListener(this);
+				dynamicPanel.add(pokeChoiceThree);
+				
+				break;
+		    }
+			
+			case 3:
+			{
+				int i = 5;
+				
+				JButton attack;
+				 
+				while(playerOneCurrentPokemon.hasNext())
+				{
+					attack = new JButton(playerOneCurrentPokemon.next().getDescription());
+				
+					
+					i++;
+					
+					
+					
+					switch(i)
+					{
+					case 5:
+						
+						attackChoiceOne = attack;
+						attackChoiceOne.addActionListener(this);
+						dynamicPanel.add(attackChoiceOne);
+						
+						break;
+					case 6:
+						
+						attackChoiceTwo = attack;
+						attackChoiceTwo.addActionListener(this);
+						dynamicPanel.add(attackChoiceTwo);
+						
+						break;
+					case 7:
+						
+						attackChoiceThree = attack;
+						attackChoiceThree.addActionListener(this);
+						dynamicPanel.add(attackChoiceThree);
+						
+						break;
+					case 8:
+						
+						attackChoiceFour = attack;
+						attackChoiceFour.addActionListener(this);
+						dynamicPanel.add(attackChoiceFour);
+						break;
+					default:
+						break;
+					
+					}
+				}
+			}
+			default:
+				break;
+		}
 		
-		
-		ImageIcon start = e.getPokemonImage(pokemon0.getDescription());	
-		Image newimg = start.getImage();
-		start = new ImageIcon(newimg); 
+		dynamicPanel.revalidate();
+		dynamicPanel.repaint();
 		
 	}
 	
 	
+	void interactionPane()
+	{
+		//attack button
+		attackButton = new JButton("ATTACK");
+		attackButton.addActionListener(this);
+		interactionPane.add(attackButton);
+		
+		//bag button
+		bagButton = new JButton("BAG");
+		bagButton.addActionListener(this);
+		interactionPane.add(bagButton);
+		
+		//pokemon button
+		pokemonButton = new JButton("POKeMON");
+		pokemonButton.addActionListener(this);
+		interactionPane.add(pokemonButton);
+		
+		//run button
+		runButton = new JButton("RUN");
+		runButton.addActionListener(this);
+		interactionPane.add(runButton);
+	}
 	
 	
+	
+
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		// TODO Auto-generated method stub
+		// MAIN BUTTON CHOICES
+		if (e.getSource() == attackButton)
+		{
+			dynamicOption = 3;
+			dynamicPane();
+			
+				
+		}
+		if (e.getSource() == runButton)
+		{
+			//close program
+			System.exit(0);
+		}
+		if(e.getSource() == pokemonButton)
+		{
+			//draw the pick pokemon options in the dynamic panel
+			dynamicOption = 1;
+			dynamicPane();
+		}
+		if(e.getSource() == bagButton)
+		{
+			dynamicOption = 2;
+			dynamicPane();
+		}
+		
+		
+		//POKEMON CHOICES >>> REDRAWS THE INFO AND PICTURE PANE BASED ON WHAT IS CURRENT
+		if(e.getSource() == pokeChoiceOne)
+		{
+			playerOne.changeActivePokemon(0);
+			playerOneCurrentPokemon = playerOne.getActivePokemon();
+			ourInfoPane();
+			System.out.println(playerOne.getActivePokemon().getDescription());
+			try
+			{
+				ourPicPane();
+			} catch (IOException e1)
+			{
+				e1.printStackTrace();
+			}
+		}
+		if(e.getSource() == pokeChoiceTwo)
+		{
+			playerOne.changeActivePokemon(1);
+			playerOneCurrentPokemon = playerOne.getActivePokemon();
+			ourInfoPane();
+			System.out.println(playerOne.getActivePokemon().getDescription());
+			try
+			{
+				ourPicPane();
+			} catch (IOException e1)
+			{
+				e1.printStackTrace();
+			}
+			
+		}
+		if(e.getSource() == pokeChoiceThree)
+		{
+
+			playerOne.changeActivePokemon(2);
+			playerOneCurrentPokemon = playerOne.getActivePokemon();
+			ourInfoPane();
+			System.out.println(playerOne.getActivePokemon().getDescription());
+			try
+			{
+				ourPicPane();
+			} catch (IOException e1)
+			{
+				e1.printStackTrace();
+			}
+		}
+		
+		if(e.getSource() == attackChoiceOne)
+		{
+			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 0);
+			oppInfoPane();
+		}
+		
+		if(e.getSource() == attackChoiceTwo)
+		{
+			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 1);
+			oppInfoPane();
+		}
+		
+		if(e.getSource() == attackChoiceThree)
+		{
+			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 2);
+			oppInfoPane();
+		}
+		
+		if(e.getSource() == attackChoiceFour)
+		{
+			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 3);
+			oppInfoPane();
+		}
 		
 	}
 
