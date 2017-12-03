@@ -85,7 +85,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	private JButton attackChoiceThree;
 	private JButton attackChoiceFour;
 
-	AttackCommand attack;
+	AttackCommand attackCall;
 	ChangeActivePokemonCommand change;
 	
 	
@@ -102,12 +102,14 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(400,400);
 		
-		//set commands to current player
+		//register commands to current player
 		change = new ChangeActivePokemonCommand(playerNum);
-		attack = new AttackCommand(playerNum);
+		attackCall = new AttackCommand(playerNum);
 		
-		//get players and set as active 
+		//set playerOne as the person who's battle window it is
 	    playerOne = e.getPlayer(playerNum);
+	    
+	    //set the opponent as player 2
 	    if(playerNum == 0)
 	    {
 		   playerTwo = e.getPlayer(1);
@@ -117,23 +119,15 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	    	playerTwo = e.getPlayer(0);
 	    }
 		
-	    //////////////////////// Area of active testing/changing
+	    //set opponant
+	    playerOne.setOpponent(playerTwo);
 	    
-		//get their starting pokemon 		//GET ACTIVE THROWS ISSUES HERE IDK
+	    
+		//set their starting pokemon 		
 		playerOneCurrentPokemon = playerOne.getPokemon(0);
 		playerTwoCurrentPokemon = playerTwo.getPokemon(0);
-		
-				
-		//change.setPokemon(1);
-		//change.execute();
-		//playerOneCurrentPokemon = playerOne.getActivePokemon();
-		//playerTwoCurrentPokemon = playerTwo.getActivePokemon();
-		
-		
-		//Pokemon test = playerOne.getActivePokemon();
-		//test.getDescription();
-		
-		//////////////////////
+		playerOne.changeActivePokemon(0);
+		playerTwo.changeActivePokemon(0);
 		
 		//build guts
 		init();
@@ -300,6 +294,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		{
 			case 0:
 				break;
+				
+			//Switch pokemon case	
 			case 1:
 			{
 				//Present the choices of pokemon to pick
@@ -324,6 +320,11 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				break;
 		    }
 			
+			//Bag case... pretty much a clear
+			case 2:
+				break;
+			
+			//Attack Case
 			case 3:
 			{
 				int i = 5;
@@ -333,11 +334,6 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				while(playerOneCurrentPokemon.hasNext())
 				{
 					attack = new JButton(playerOneCurrentPokemon.next().getDescription());
-				
-					
-					i++;
-					
-					
 					
 					switch(i)
 					{
@@ -372,8 +368,12 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 						break;
 					
 					}
+					
+					i++;
 				}
 			}
+			
+			
 			
 			default:
 				break;
@@ -412,7 +412,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	/**
 	 * UPDATES ALL PANES BUT DYNAMIC
 	 */
-	void updateAllPanes() 
+	public void updateAllPanes() 
 	{
 		ourInfoPane();
 		oppInfoPane();
@@ -468,68 +468,114 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		//POKEMON CHOICES >>> REDRAWS THE INFO AND PICTURE PANE BASED ON WHAT IS CURRENT
 		if(e.getSource() == pokeChoiceOne)
 		{
-			playerOne.changeActivePokemon(0);
-			//change.setPokemon(0);
-			//change.execute();
-			////////////////////////////////////
-			
+			//call to change pokemon, will work if its our turn
+			change.setPokemon(0);
+			change.execute();
 			playerOneCurrentPokemon = playerOne.getActivePokemon();
+			
+			//only necessary right now until a round update push is implemented
+			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
 			System.out.println(playerOne.getActivePokemon().getDescription());
 			
 			updateAllPanes();
+			
+			//clears dynamic pane
+			dynamicOption = 2;
+			dynamicPane();
 			
 		}
 		if(e.getSource() == pokeChoiceTwo)
 		{
-			playerOne.changeActivePokemon(1);
-			//change.setPokemon(1);
-			//change.execute();
-			/////////////////////////////////
-			
+			//call to change pokemon, will work if its our turn
+			change.setPokemon(1);
+			change.execute();			
 			playerOneCurrentPokemon = playerOne.getActivePokemon();
+			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
 			System.out.println(playerOne.getActivePokemon().getDescription());
 			
 			updateAllPanes();
+			
+			//clears dynamic pane
+			dynamicOption = 2;
+			dynamicPane();
 			
 		}
 		if(e.getSource() == pokeChoiceThree)
 		{
-
-			playerOne.changeActivePokemon(2);
-			//change.setPokemon(2);
-			//change.execute();
-			////////////////////////////////////////
-			
+			//call to change pokemon, will work if its our turn
+			change.setPokemon(2);
+			change.execute();
 			playerOneCurrentPokemon = playerOne.getActivePokemon();
+			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
 			System.out.println(playerOne.getActivePokemon().getDescription());
 			
 			updateAllPanes();
+			
+			//clears dynamic pane
+			dynamicOption = 2;
+			dynamicPane();
 		}
 		
 		
 		//ATTACK BUTTONS
 		if(e.getSource() == attackChoiceOne)
 		{
-			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 0);
+			
+			attackCall.setAttack(0);
+			attackCall.execute();
+			
+			playerOneCurrentPokemon = playerOne.getActivePokemon();
+			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
+			
 			updateAllPanes();
+			
+			//clears dynamic pane
+			dynamicOption = 2;
+			dynamicPane();
 		}
 		
 		if(e.getSource() == attackChoiceTwo)
 		{
-			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 1);
+			
+			attackCall.setAttack(1);
+			attackCall.execute();
+			
 			updateAllPanes();
+			
+			//clears dynamic pane
+			dynamicOption = 2;
+			dynamicPane();
 		}
 		
 		if(e.getSource() == attackChoiceThree)
 		{
-			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 2);
+			
+			attackCall.setAttack(2);
+			attackCall.execute();
+			
+			playerOneCurrentPokemon = playerOne.getActivePokemon();
+			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
+			
 			updateAllPanes();
+			
+			//clears dynamic pane
+			dynamicOption = 2;
+			dynamicPane();
 		}
 		
 		if(e.getSource() == attackChoiceFour)
 		{
-			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 3);
+			
+			attackCall.setAttack(3);
+			attackCall.execute();
+			
+			playerOneCurrentPokemon = playerOne.getActivePokemon();
+			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
+			
 			updateAllPanes();
+			
+			dynamicOption = 2;
+			dynamicPane();
 		}
 		
 		

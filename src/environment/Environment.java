@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 
 import gameplay.*;
 import gui.PokemonImages;
+import gui.WindowBuilderBattleGui;
 import lifeform.*;
 
 public class Environment implements Observer, Iterator {
@@ -20,6 +21,8 @@ public class Environment implements Observer, Iterator {
 	private int pokemonIterator;
 	
 	private Timer timer;
+	
+	WindowBuilderBattleGui battlegui;
 	
 	private Environment()
 	{
@@ -208,4 +211,5 @@ public class Environment implements Observer, Iterator {
 		}
 		
 	}
+	
 }

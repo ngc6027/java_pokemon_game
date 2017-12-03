@@ -125,8 +125,8 @@ public class ConfirmGUI extends JFrame implements ActionListener
 				setVisible(false);
 				//open up the final screen for the battle 
 				try
-				{
-					//new BattleGUI();
+				{	
+					
 					new WindowBuilderBattleGui(0);
 					new WindowBuilderBattleGui(1);
 				} catch (IOException e1)
