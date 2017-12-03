@@ -127,7 +127,8 @@ public class ConfirmGUI extends JFrame implements ActionListener
 				try
 				{
 					//new BattleGUI();
-					new WindowBuilderBattleGui();
+					new WindowBuilderBattleGui(0);
+					new WindowBuilderBattleGui(1);
 				} catch (IOException e1)
 				{
 					// TODO Auto-generated catch block

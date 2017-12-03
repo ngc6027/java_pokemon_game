@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.awt.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+
+import commands.AttackCommand;
+import commands.ChangeActivePokemonCommand;
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -81,29 +85,60 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	private JButton attackChoiceThree;
 	private JButton attackChoiceFour;
 
+	AttackCommand attack;
+	ChangeActivePokemonCommand change;
+	
 	
 	/**
+	 * @param playerNum 
 	 * @throws IOException
 	 */
-	public WindowBuilderBattleGui() throws IOException
+	public WindowBuilderBattleGui(int playerNum) throws IOException
 	{
 		//setup
-		super("Battle");
+		super("Battle: Player " + playerNum);
 		this.e = Environment.getEnvironment();
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(400,400);
 		
-		//get players
-	    playerOne = e.getPlayer(0);
-		playerTwo = e.getPlayer(1);
-
+		//set commands to current player
+		change = new ChangeActivePokemonCommand(playerNum);
+		attack = new AttackCommand(playerNum);
+		
+		//get players and set as active 
+	    playerOne = e.getPlayer(playerNum);
+	    if(playerNum == 0)
+	    {
+		   playerTwo = e.getPlayer(1);
+	    }
+	    else
+	    {
+	    	playerTwo = e.getPlayer(0);
+	    }
+		
+	    //////////////////////// Area of active testing/changing
+	    
 		//get their starting pokemon 		//GET ACTIVE THROWS ISSUES HERE IDK
 		playerOneCurrentPokemon = playerOne.getPokemon(0);
 		playerTwoCurrentPokemon = playerTwo.getPokemon(0);
 		
+				
+		//change.setPokemon(1);
+		//change.execute();
+		//playerOneCurrentPokemon = playerOne.getActivePokemon();
+		//playerTwoCurrentPokemon = playerTwo.getActivePokemon();
+		
+		
+		//Pokemon test = playerOne.getActivePokemon();
+		//test.getDescription();
+		
+		//////////////////////
+		
 		//build guts
 		init();
+		
+		
 	}
 
 	
@@ -217,6 +252,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	
 	void opponentPicPane() throws IOException
 	{
+		opponentPic.removeAll();
+		
 		//get image for opponents current pokemon
 		ImageIcon oppImage;
 		oppImage = e.getPokemonImage(playerTwoCurrentPokemon.getDescription());	
@@ -228,6 +265,9 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 
 		opponentPicture = new JButton(oppImage);
 		opponentPic.add(opponentPicture);
+		
+		opponentPic.revalidate();
+		opponentPic.repaint();
 	}
 	
 	
@@ -368,6 +408,35 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		interactionPane.add(runButton);
 	}
 
+	
+	/**
+	 * UPDATES ALL PANES BUT DYNAMIC
+	 */
+	void updateAllPanes() 
+	{
+		ourInfoPane();
+		oppInfoPane();
+		try
+		{
+			ourPicPane();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try
+		{
+			opponentPicPane();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -400,46 +469,41 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		if(e.getSource() == pokeChoiceOne)
 		{
 			playerOne.changeActivePokemon(0);
+			//change.setPokemon(0);
+			//change.execute();
+			////////////////////////////////////
+			
 			playerOneCurrentPokemon = playerOne.getActivePokemon();
-			ourInfoPane();
 			System.out.println(playerOne.getActivePokemon().getDescription());
-			try
-			{
-				ourPicPane();
-			} catch (IOException e1)
-			{
-				e1.printStackTrace();
-			}
+			
+			updateAllPanes();
+			
 		}
 		if(e.getSource() == pokeChoiceTwo)
 		{
 			playerOne.changeActivePokemon(1);
+			//change.setPokemon(1);
+			//change.execute();
+			/////////////////////////////////
+			
 			playerOneCurrentPokemon = playerOne.getActivePokemon();
-			ourInfoPane();
 			System.out.println(playerOne.getActivePokemon().getDescription());
-			try
-			{
-				ourPicPane();
-			} catch (IOException e1)
-			{
-				e1.printStackTrace();
-			}
+			
+			updateAllPanes();
 			
 		}
 		if(e.getSource() == pokeChoiceThree)
 		{
 
 			playerOne.changeActivePokemon(2);
+			//change.setPokemon(2);
+			//change.execute();
+			////////////////////////////////////////
+			
 			playerOneCurrentPokemon = playerOne.getActivePokemon();
-			ourInfoPane();
 			System.out.println(playerOne.getActivePokemon().getDescription());
-			try
-			{
-				ourPicPane();
-			} catch (IOException e1)
-			{
-				e1.printStackTrace();
-			}
+			
+			updateAllPanes();
 		}
 		
 		
@@ -447,25 +511,25 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		if(e.getSource() == attackChoiceOne)
 		{
 			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 0);
-			oppInfoPane();
+			updateAllPanes();
 		}
 		
 		if(e.getSource() == attackChoiceTwo)
 		{
 			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 1);
-			oppInfoPane();
+			updateAllPanes();
 		}
 		
 		if(e.getSource() == attackChoiceThree)
 		{
 			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 2);
-			oppInfoPane();
+			updateAllPanes();
 		}
 		
 		if(e.getSource() == attackChoiceFour)
 		{
 			playerOneCurrentPokemon.attack(playerTwoCurrentPokemon, 3);
-			oppInfoPane();
+			updateAllPanes();
 		}
 		
 		
