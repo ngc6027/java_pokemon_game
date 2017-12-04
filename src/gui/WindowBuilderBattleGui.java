@@ -23,6 +23,7 @@ import commands.ChangeActivePokemonCommand;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.JLayeredPane;
 
 /**
  * @author derekgrove
@@ -35,34 +36,32 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	
 	
 	//panel and button setup
-	JPanel mainPanel;
-	JPanel interactionPane;
-	JPanel opponentInfo;
-	JPanel ourInfo;
-	JPanel opponentPic;
-	JPanel ourPic;
-	JPanel dynamicPanel;
-	JButton runButton;
-	JButton attackButton;
-	JButton pokemonButton;
-	JButton bagButton;
+	private JLayeredPane mainPanel;
+	private JPanel interactionPane;
+	private JPanel opponentInfo;
+	private JPanel ourInfo;
+	private JPanel opponentPic;
+	private JPanel ourPic;
+	private JPanel dynamicPanel;
+	private JButton runButton;
+	private JButton attackButton;
+	private JButton pokemonButton;
+	private JButton bagButton;
 	
 	
 	//current player setup
 	private JLabel ourPokemonLabel;
 	private Player playerOne;
 	private Pokemon playerOneCurrentPokemon;
-	private JButton playerOneImage;
 	private JProgressBar playerTwoHealth;
 	
 	//opposite player setup
 	private JLabel opPokemonLabel;
 	private Player playerTwo;
 	private Pokemon playerTwoCurrentPokemon;
-	private JButton playerTwoImage;
 	private JProgressBar playerOneHealth;
 
-	//i forget what these are
+	//images
 	private JButton opponentPicture;
 	private JButton ourImage;
 	
@@ -73,13 +72,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	private JButton pokeChoiceThree;
 	int dynamicOption = 0;
 	private JLabel bigHpLabel;
-	private JLabel lblNewLabel;
+	
 
-	private JLabel pickAttackLabel;
-	private JButton attack1;
-	private JButton attack2;
-	private JButton attack3;
-	private JButton attack4;
 	private JButton attackChoiceOne;
 	private JButton attackChoiceTwo;
 	private JButton attackChoiceThree;
@@ -87,7 +81,9 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 
 	AttackCommand attackCall;
 	ChangeActivePokemonCommand change;
-	
+
+
+	private JLabel lblNewLabel;
 	
 	/**
 	 * @param playerNum 
@@ -102,6 +98,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(400,400);
 		
+		e.setBattleGui(this, playerNum);
+	
 		//register commands to current player
 		change = new ChangeActivePokemonCommand(playerNum);
 		attackCall = new AttackCommand(playerNum);
@@ -132,46 +130,51 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		//build guts
 		init();
 		
-		
 	}
-
+	
 	
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
 	 */
-	private void init() throws IOException
+	protected void init() throws IOException
 	{
 		//main overall panel
-		mainPanel = new JPanel();
+		mainPanel = new JLayeredPane();
 		mainPanel.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, null, null));
 		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
 		mainPanel.setLayout(new GridLayout(3, 2, 0, 0));
+		mainPanel.setOpaque(true);
 		
+
 		//the pane that holds all of the info for the opponant pokemon
 		opponentInfo = new JPanel();
-		opponentInfo.setBackground(Color.GREEN);
+		//opponentInfo.setBackground(Color.GREEN);
+		opponentInfo.setOpaque(true);
 		mainPanel.add(opponentInfo);
 		opponentInfo.setLayout(new GridLayout(3, 1, 0, 0));
 		oppInfoPane();
 		
 		//set up the opponant panel that contains their pokemon pic
 		opponentPic = new JPanel();
-		opponentPic.setBackground(Color.GREEN);
+		//opponentPic.setBackground(Color.GREEN);
+		opponentPic.setOpaque(true);
 		mainPanel.add(opponentPic);
 		opponentPic.setLayout(new GridLayout(0, 1, 0, 0));
 		opponentPicPane();
 		
 		//set up current player panel that contains our pokemon pic
 		ourPic = new JPanel();
-		ourPic.setBackground(Color.GREEN);
+		//ourPic.setBackground(Color.GREEN);
+		ourPic.setOpaque(true);
 		mainPanel.add(ourPic);
 		ourPic.setLayout(new GridLayout(1, 0, 0, 0));
 		ourPicPane();
 		
 		//the pane that holds all of the info for our pokemon
 		ourInfo = new JPanel();
-		ourInfo.setBackground(Color.GREEN);
+		//ourInfo.setBackground(Color.GREEN);
+		ourInfo.setOpaque(true);
 		mainPanel.add(ourInfo);
 		ourInfo.setLayout(new GridLayout(4, 1, 0, 0));
 		ourInfoPane();
@@ -190,10 +193,16 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		mainPanel.add(interactionPane);
 		interactionPane.setLayout(new GridLayout(2, 2, 0, 0));
 		interactionPane();
+		
+		
+
+		
+
+		
 	}
 	
 	
-	void oppInfoPane()
+	private void oppInfoPane()
 	{
 		opponentInfo.removeAll();
 		
@@ -213,7 +222,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	}
 	
 	
-	void ourInfoPane()
+	private void ourInfoPane()
 	{
 		ourInfo.removeAll();
 		
@@ -244,7 +253,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	}
 	
 	
-	void opponentPicPane() throws IOException
+	private void opponentPicPane() throws IOException
 	{
 		opponentPic.removeAll();
 		
@@ -265,7 +274,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	}
 	
 	
-	void ourPicPane() throws IOException
+	private void ourPicPane() throws IOException
 	{
 		ourPic.removeAll();
 		
@@ -285,7 +294,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	
 	
 	
-	void dynamicPane()
+	public void dynamicPane()
 	{
 		dynamicPanel.removeAll();
 		
@@ -306,16 +315,31 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				pokeChoiceOne = new JButton(pokemonName);
 				pokeChoiceOne.addActionListener(this);
 				dynamicPanel.add(pokeChoiceOne);
+				//these will darken the button if they are dead
+				if(playerOne.getPokemon(0).getCurrentHealth() == 0)
+				{
+					pokeChoiceOne.setEnabled(false);
+				}
 				
 				pokemonName = playerOne.getPokemon(1).getDescription();
 				pokeChoiceTwo = new JButton(pokemonName);
 				pokeChoiceTwo.addActionListener(this);
 				dynamicPanel.add(pokeChoiceTwo);
+				if(playerOne.getPokemon(1).getCurrentHealth() == 0)
+				{
+					pokeChoiceOne.setEnabled(false);
+				}
+				
 		
 				pokemonName = playerOne.getPokemon(2).getDescription();
 				pokeChoiceThree = new JButton(pokemonName);
 				pokeChoiceThree.addActionListener(this);
 				dynamicPanel.add(pokeChoiceThree);
+				if(playerOne.getPokemon(1).getCurrentHealth() == 0)
+				{
+					pokeChoiceOne.setEnabled(false);
+				}
+				
 				
 				break;
 		    }
@@ -414,6 +438,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	 */
 	public void updateAllPanes() 
 	{
+		playerOneCurrentPokemon = playerOne.getActivePokemon();
+		playerTwoCurrentPokemon = playerTwo.getActivePokemon();
 		ourInfoPane();
 		oppInfoPane();
 		try
@@ -421,7 +447,6 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			ourPicPane();
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try
@@ -429,7 +454,6 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			opponentPicPane();
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -471,10 +495,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//call to change pokemon, will work if its our turn
 			change.setPokemon(0);
 			change.execute();
-			playerOneCurrentPokemon = playerOne.getActivePokemon();
-			
-			//only necessary right now until a round update push is implemented
-			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
+
 			System.out.println(playerOne.getActivePokemon().getDescription());
 			
 			updateAllPanes();
@@ -489,8 +510,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//call to change pokemon, will work if its our turn
 			change.setPokemon(1);
 			change.execute();			
-			playerOneCurrentPokemon = playerOne.getActivePokemon();
-			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
+
 			System.out.println(playerOne.getActivePokemon().getDescription());
 			
 			updateAllPanes();
@@ -505,8 +525,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//call to change pokemon, will work if its our turn
 			change.setPokemon(2);
 			change.execute();
-			playerOneCurrentPokemon = playerOne.getActivePokemon();
-			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
+	
 			System.out.println(playerOne.getActivePokemon().getDescription());
 			
 			updateAllPanes();
@@ -520,12 +539,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		//ATTACK BUTTONS
 		if(e.getSource() == attackChoiceOne)
 		{
-			
 			attackCall.setAttack(0);
 			attackCall.execute();
-			
-			playerOneCurrentPokemon = playerOne.getActivePokemon();
-			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
 			
 			updateAllPanes();
 			
@@ -536,7 +551,6 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		
 		if(e.getSource() == attackChoiceTwo)
 		{
-			
 			attackCall.setAttack(1);
 			attackCall.execute();
 			
@@ -553,9 +567,6 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			attackCall.setAttack(2);
 			attackCall.execute();
 			
-			playerOneCurrentPokemon = playerOne.getActivePokemon();
-			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
-			
 			updateAllPanes();
 			
 			//clears dynamic pane
@@ -568,18 +579,13 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			
 			attackCall.setAttack(3);
 			attackCall.execute();
-			
-			playerOneCurrentPokemon = playerOne.getActivePokemon();
-			playerTwoCurrentPokemon = playerTwo.getActivePokemon();
-			
+
 			updateAllPanes();
 			
+			//clears dynamic pane
 			dynamicOption = 2;
 			dynamicPane();
 		}
 		
-		
-		
 	}
-
 }

@@ -22,7 +22,8 @@ public class Environment implements Observer, Iterator {
 	
 	private Timer timer;
 	
-	WindowBuilderBattleGui battlegui;
+	WindowBuilderBattleGui p1;
+	WindowBuilderBattleGui p2;
 	
 	private Environment()
 	{
@@ -193,6 +194,9 @@ public class Environment implements Observer, Iterator {
 		{
 			this.players.get(turn).attack(attackNum);
 			this.timer.update();
+			
+			p1.updateAllPanes();
+			p2.updateAllPanes();
 		}
 	}
 	
@@ -208,6 +212,23 @@ public class Environment implements Observer, Iterator {
 		if(success)
 		{
 			this.timer.update();
+			
+		}
+		
+		p1.updateAllPanes();
+		p2.updateAllPanes();
+
+	}	
+	
+	public void setBattleGui(WindowBuilderBattleGui gui, int playerNum)
+	{
+		if(playerNum == 0)
+		{
+			this.p1 = gui;
+		}
+		if(playerNum == 1)
+		{
+			this.p2 = gui;
 		}
 		
 	}
