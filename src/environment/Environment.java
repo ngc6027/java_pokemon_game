@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 
 import gameplay.*;
 import gui.PokemonImages;
+import gui.WindowBuilderBattleGui;
 import lifeform.*;
 
 /**
@@ -28,6 +29,7 @@ public class Environment implements Observer, Iterator {
 	
 	private Timer timer;
 	
+
 	
 	/* ****************************************************************
 	 * 																  *
@@ -39,6 +41,10 @@ public class Environment implements Observer, Iterator {
 	 * This instantiates all players, all Pokemon, the timer, and loads
 	 * the images for the Pokemon.
 	 */
+
+	WindowBuilderBattleGui p1;
+	WindowBuilderBattleGui p2;
+
 	private Environment()
 	{
 		this.players = new ArrayList<Player>();
@@ -191,6 +197,9 @@ public class Environment implements Observer, Iterator {
 		{
 			this.players.get(playerNum).attack(attackNum);
 			this.timer.update();
+			
+			p1.updateAllPanes();
+			p2.updateAllPanes();
 		}
 	}
 	
@@ -220,6 +229,9 @@ public class Environment implements Observer, Iterator {
 			this.timer.update();
 		}
 		
+		p1.updateAllPanes();
+		p2.updateAllPanes();
+		
 	}
 	
 	/**
@@ -229,6 +241,19 @@ public class Environment implements Observer, Iterator {
 	public void registerWithTimer(Observer o)
 	{
 		this.timer.register(o);
+	}
+	
+	public void setBattleGui(WindowBuilderBattleGui gui, int playerNum)
+	{
+		if(playerNum == 0)
+		{
+			this.p1 = gui;
+		}
+		if(playerNum == 1)
+		{
+			this.p2 = gui;
+		}
+		
 	}
 	
 	/* ******************************************************
@@ -332,5 +357,49 @@ public class Environment implements Observer, Iterator {
 	{
 		return players.get(index);
 	}
+	
+	
+	/* ******************************************************************************
+	 *                        Commands for Command Pattern                          *
+	 * ******************************************************************************/
+	
+//	public void assignPokemon(int index)
+//	{		
+//		this.players.get(turn).addPokemon(this.pokemon.get(index));	
+//		
+//		this.timer.update();
+//	}
+//	
+//	public void attack(int attackNum, int turn)
+//	{
+//		if(turn == this.turn)
+//		{
+//			this.players.get(turn).attack(attackNum);
+//			this.timer.update();
+//			
+//			p1.updateAllPanes();
+//			p2.updateAllPanes();
+//		}
+//	}
+//	
+//	public void changeActivePokemon(int pokemonNum, int turn)
+//	{
+//		boolean success = false;
+//		
+//		if(turn == this.turn)
+//		{
+//			success = this.players.get(turn).changeActivePokemon(pokemonNum);
+//		}
+//		
+//		if(success)
+//		{
+//			this.timer.update();
+//			
+//		}
+//		
+//		p1.updateAllPanes();
+//		p2.updateAllPanes();
+//
+//	}	
 	
 }
