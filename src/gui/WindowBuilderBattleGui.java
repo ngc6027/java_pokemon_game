@@ -149,32 +149,32 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 
 		//the pane that holds all of the info for the opponant pokemon
 		opponentInfo = new JPanel();
-		//opponentInfo.setBackground(Color.GREEN);
-		opponentInfo.setOpaque(true);
+		opponentInfo.setBackground(Color.GREEN);
+		//opponentInfo.setOpaque(true);
 		mainPanel.add(opponentInfo);
 		opponentInfo.setLayout(new GridLayout(3, 1, 0, 0));
 		oppInfoPane();
 		
 		//set up the opponant panel that contains their pokemon pic
 		opponentPic = new JPanel();
-		//opponentPic.setBackground(Color.GREEN);
-		opponentPic.setOpaque(true);
+		opponentPic.setBackground(Color.GREEN);
+		//opponentPic.setOpaque(true);
 		mainPanel.add(opponentPic);
 		opponentPic.setLayout(new GridLayout(0, 1, 0, 0));
 		opponentPicPane();
 		
 		//set up current player panel that contains our pokemon pic
 		ourPic = new JPanel();
-		//ourPic.setBackground(Color.GREEN);
-		ourPic.setOpaque(true);
+		ourPic.setBackground(Color.GREEN);
+		//ourPic.setOpaque(true);
 		mainPanel.add(ourPic);
 		ourPic.setLayout(new GridLayout(1, 0, 0, 0));
 		ourPicPane();
 		
 		//the pane that holds all of the info for our pokemon
 		ourInfo = new JPanel();
-		//ourInfo.setBackground(Color.GREEN);
-		ourInfo.setOpaque(true);
+		ourInfo.setBackground(Color.GREEN);
+		//ourInfo.setOpaque(true);
 		mainPanel.add(ourInfo);
 		ourInfo.setLayout(new GridLayout(4, 1, 0, 0));
 		ourInfoPane();
