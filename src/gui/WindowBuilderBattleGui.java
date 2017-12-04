@@ -213,7 +213,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		opPokemonLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		opponentInfo.add(opPokemonLabel);
 		//grab the health and set it
-		playerTwoHealth = new JProgressBar(0, 100);
+		playerTwoHealth = new JProgressBar(0, playerTwoCurrentPokemon.getMaxHealth());
 		playerTwoHealth.setValue(playerTwoCurrentPokemon.getCurrentHealth());
 		opponentInfo.add(playerTwoHealth);
 		
@@ -237,12 +237,12 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		ourInfo.add(ourPokemonLabel);
 		
 		//set the health bar
-		playerOneHealth = new JProgressBar(0,100);
+		playerOneHealth = new JProgressBar(0, playerOneCurrentPokemon.getMaxHealth());
 		playerOneHealth.setValue(playerOneCurrentPokemon.getCurrentHealth());
 		ourInfo.add(playerOneHealth);
 		
 		//have a number version health
-		String health = playerOneCurrentPokemon.getCurrentHealth() + " / 100";
+		String health = playerOneCurrentPokemon.getCurrentHealth() + " / " + playerOneCurrentPokemon.getMaxHealth();
 		bigHpLabel = new JLabel(health);
 		bigHpLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		bigHpLabel.setHorizontalAlignment(SwingConstants.CENTER);
