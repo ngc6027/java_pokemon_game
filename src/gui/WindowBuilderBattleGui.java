@@ -84,6 +84,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 
 	private JLayeredPane layeredBase;
 	
+	
 	private JLabel background;
 	private JLabel lblNewLabel;
 	private JPanel panel;
@@ -165,7 +166,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 
 		//the pane that holds all of the info for the opponant pokemon
 		opponentInfo = new JPanel();
-		opponentInfo.setBackground(Color.GREEN);
+		opponentInfo.setBackground(Color.RED);
 		//opponentInfo.setOpaque(true);
 		mainPanel.add(opponentInfo);
 		opponentInfo.setLayout(new GridLayout(3, 1, 0, 0));
@@ -173,7 +174,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		
 		//set up the opponant panel that contains their pokemon pic
 		opponentPic = new JPanel();
-		opponentPic.setBackground(Color.GREEN);
+		opponentPic.setBackground(Color.RED);
 		//opponentPic.setOpaque(true);
 		mainPanel.add(opponentPic);
 		opponentPic.setLayout(new GridLayout(0, 1, 0, 0));
@@ -181,7 +182,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		
 		//set up current player panel that contains our pokemon pic
 		ourPic = new JPanel();
-		ourPic.setBackground(Color.GREEN);
+		ourPic.setBackground(Color.BLUE);
 		//ourPic.setOpaque(true);
 		mainPanel.add(ourPic);
 		ourPic.setLayout(new GridLayout(1, 0, 0, 0));
@@ -189,7 +190,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		
 		//the pane that holds all of the info for our pokemon
 		ourInfo = new JPanel();
-		ourInfo.setBackground(Color.GREEN);
+		ourInfo.setBackground(Color.BLUE);
 		//ourInfo.setOpaque(true);
 		mainPanel.add(ourInfo);
 		ourInfo.setLayout(new GridLayout(4, 1, 0, 0));
@@ -197,6 +198,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		
 		//dynamic Pane that shows what is currently needed
 		dynamicPanel = new JPanel();
+		dynamicPanel.setBackground(Color.LIGHT_GRAY);
 		dynamicPanel.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 0), Color.BLACK));
 		mainPanel.add(dynamicPanel);
 		dynamicPanel.setLayout(new GridLayout(4, 1, 0, 0));
@@ -205,6 +207,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		
 		//pane that holds the options at start of turn
 		interactionPane = new JPanel();
+		interactionPane.setBackground(Color.LIGHT_GRAY);
 		interactionPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 0), Color.BLACK));
 		mainPanel.add(interactionPane);
 		interactionPane.setLayout(new GridLayout(2, 2, 0, 0));
