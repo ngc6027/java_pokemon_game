@@ -2,6 +2,11 @@ package states;
 
 import lifeform.*;
 
+/**
+ * Abstract class for defining what each state needs 
+ * to contain
+ * @author Michael Foreman
+ */
 public abstract class HealthState {
 
 	Pokemon pokemon;
