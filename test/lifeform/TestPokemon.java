@@ -23,7 +23,7 @@ public class TestPokemon {
 	private class MockPokemon extends Pokemon
 	{
 		public MockPokemon(Type type) {
-			super(type, 100, "Lapras");
+			super(type, 2, "Lapras");
 			
 			attacks.add(new Tackle());
 			attacks.add(new VineWhip());

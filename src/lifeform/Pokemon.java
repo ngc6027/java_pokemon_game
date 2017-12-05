@@ -18,6 +18,7 @@ public abstract class Pokemon implements Iterator {
 
 	private int 				currentHealth;
 	private int 				maxHealth;
+	final protected int[]    	HEALTH_OPTIONS = {50, 75, 100};
 	private String	 			name;
 	
 	private FullState 			fullState;
@@ -37,7 +38,7 @@ public abstract class Pokemon implements Iterator {
 	 * @param maxHP the maximum hit points of the Pokemon.
 	 * @param name the name of the Pokemon.
 	 */
-	public Pokemon(Type type, int maxHP, String name)
+	public Pokemon(Type type, int tier, String name)
 	{
 		fullState = new FullState(this);
 		damagedState = new DamagedState(this);
@@ -49,7 +50,7 @@ public abstract class Pokemon implements Iterator {
 		this.type = type;
 	
 		// starts at max health
-		maxHealth = maxHP;
+		maxHealth = HEALTH_OPTIONS[tier];
 		currentHealth = maxHealth;
 		this.name = name;
 		
@@ -206,6 +207,11 @@ public abstract class Pokemon implements Iterator {
 		this.currentHealth = this.maxHealth;
 		this.attackIterator = 0;
 		this.currentState = this.fullState;
+	}
+	
+	public int getMaxHealth()
+	{
+		return this.maxHealth;
 	}
 	
 }
