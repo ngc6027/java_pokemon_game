@@ -181,7 +181,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		
 		//set up current player panel that contains our pokemon pic
 		ourPic = new JPanel();
-		ourPic.setBackground(Color.BLUE);
+		ourPic.setBackground(Color.cyan);
 		//ourPic.setOpaque(true);
 		mainPanel.add(ourPic);
 		ourPic.setLayout(new GridLayout(1, 0, 0, 0));
@@ -189,7 +189,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		
 		//the pane that holds all of the info for our pokemon
 		ourInfo = new JPanel();
-		ourInfo.setBackground(Color.BLUE);
+		ourInfo.setBackground(Color.cyan);
 		//ourInfo.setOpaque(true);
 		mainPanel.add(ourInfo);
 		ourInfo.setLayout(new GridLayout(4, 1, 0, 0));
@@ -450,7 +450,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			// prints out whose turn it is on the dynamic panel
 			case 5:
 			{
-				JLabel turnLabel = new JLabel("Your turn");
+				JLabel turnLabel = new JLabel("   Your turn");
 				dynamicPanel.add(turnLabel);
 				System.out.println("works");
 			}
