@@ -317,8 +317,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	{
 		dynamicPanel.removeAll();
 		
-		System.out.print("The current Players turn is: ");
-		System.out.println(playerOne.getTurn());
+	
 		
 		
 		//swtich statement decides what to put in the panel dependent on what button was clicked
@@ -443,7 +442,13 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			}
 			
 			
-				
+			case 5:
+			{
+				JLabel turnLabel = new JLabel("Your turn");
+				dynamicPanel.add(turnLabel);
+				System.out.println("works");
+			}
+			break;
 			
 			
 			default:
@@ -489,6 +494,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	{
 		playerOneCurrentPokemon = playerOne.getActivePokemon();
 		playerTwoCurrentPokemon = playerTwo.getActivePokemon();
+		
 		ourInfoPane();
 		oppInfoPane();
 		//System.out.println();
@@ -505,6 +511,11 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		} catch (IOException e)
 		{
 			e.printStackTrace();
+		}
+		if(playerOne.getTurn() == playerNum)
+		{
+		dynamicOption = 5;
+		dynamicPane();
 		}
 	}
 	
@@ -570,7 +581,9 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			
 			//clears dynamic pane
 			dynamicOption = 2;
+			
 			dynamicPane();
+			
 			
 		}
 		if(e.getSource() == pokeChoiceTwo)
@@ -587,6 +600,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			dynamicOption = 2;
 			dynamicPane();
 			
+			
 		}
 		if(e.getSource() == pokeChoiceThree)
 		{
@@ -601,6 +615,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//clears dynamic pane
 			dynamicOption = 2;
 			dynamicPane();
+			
 		}
 		
 		
@@ -619,6 +634,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			dynamicOption = 4;
 			dynamicPane();
 			
+			
 			checkIfWon();
 		}
 		
@@ -635,6 +651,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//print outcome
 			dynamicOption = 4;
 			dynamicPane();
+			
 			
 			checkIfWon();
 		}
@@ -654,6 +671,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			dynamicOption = 4;
 			dynamicPane();
 			
+			
 			checkIfWon();
 		}
 		
@@ -671,6 +689,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//print outcome
 			dynamicOption = 4;
 			dynamicPane();
+			
+			
 			
 			checkIfWon();
 		}
