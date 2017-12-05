@@ -214,6 +214,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		
 		
 		interactionPane();
+	
+		
 
 		
 	}
@@ -314,6 +316,9 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	public void dynamicPane()
 	{
 		dynamicPanel.removeAll();
+		
+		System.out.print("The current Players turn is: ");
+		System.out.println(playerOne.getTurn());
 		
 		
 		//swtich statement decides what to put in the panel dependent on what button was clicked
@@ -437,6 +442,10 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				break;
 			}
 			
+			
+				
+			
+			
 			default:
 				break;
 		}
@@ -520,9 +529,12 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		
+		
 		// MAIN BUTTON CHOICES
 		if (e.getSource() == attackButton)
 		{
+			
 			dynamicOption = 3;
 			dynamicPane();
 			
