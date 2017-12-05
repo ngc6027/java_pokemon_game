@@ -36,7 +36,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	
 	
 	//panel and button setup
-	private JLayeredPane mainPanel;
+	private JPanel mainPanel;
 	private JPanel interactionPane;
 	private JPanel opponentInfo;
 	private JPanel ourInfo;
@@ -70,7 +70,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	private JButton pokeChoiceOne;
 	private JButton pokeChoiceTwo;
 	private JButton pokeChoiceThree;
-	int dynamicOption = 0;
+	public int dynamicOption = 0;
 	private JLabel bigHpLabel;
 	
 
@@ -82,8 +82,14 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	AttackCommand attackCall;
 	ChangeActivePokemonCommand change;
 
-
+	private JLayeredPane layeredBase;
+	
+	private JLabel background;
 	private JLabel lblNewLabel;
+	private JPanel panel;
+	
+	protected int playerNum;
+	private int startHealth;
 	
 	/**
 	 * @param playerNum 
@@ -92,7 +98,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	public WindowBuilderBattleGui(int playerNum) throws IOException
 	{
 		//setup
-		super("Battle: Player " + playerNum);
+		super("Battle: Player " + (playerNum+1));
 		this.e = Environment.getEnvironment();
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,7 +112,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		
 		//set playerOne as the person who's battle window it is
 	    playerOne = e.getPlayer(playerNum);
-	    
+	    this.playerNum = playerNum;
 	    //set the opponent as player 2
 	    if(playerNum == 0)
 	    {
@@ -139,12 +145,22 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	 */
 	protected void init() throws IOException
 	{
+		layeredBase = new JLayeredPane();
+		layeredBase.setOpaque(true);
+		this.getContentPane().add(layeredBase);
+		layeredBase.setLayout(new BorderLayout(0, 0));
+	
+		
+		
 		//main overall panel
-		mainPanel = new JLayeredPane();
+		mainPanel = new JPanel();
 		mainPanel.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, null, null));
-		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
+		layeredBase.add(mainPanel, BorderLayout.CENTER);
+		
+		//set layer 
+		layeredBase.setLayer(mainPanel,1, 0);
+		
 		mainPanel.setLayout(new GridLayout(3, 2, 0, 0));
-		mainPanel.setOpaque(true);
 		
 
 		//the pane that holds all of the info for the opponant pokemon
@@ -192,11 +208,9 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		interactionPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 0), Color.BLACK));
 		mainPanel.add(interactionPane);
 		interactionPane.setLayout(new GridLayout(2, 2, 0, 0));
+		
+		
 		interactionPane();
-		
-		
-
-		
 
 		
 	}
@@ -298,6 +312,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	{
 		dynamicPanel.removeAll();
 		
+		
 		//swtich statement decides what to put in the panel dependent on what button was clicked
 		switch(dynamicOption)
 		{
@@ -327,7 +342,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				dynamicPanel.add(pokeChoiceTwo);
 				if(playerOne.getPokemon(1).getCurrentHealth() == 0)
 				{
-					pokeChoiceOne.setEnabled(false);
+					pokeChoiceTwo.setEnabled(false);
 				}
 				
 		
@@ -337,7 +352,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				dynamicPanel.add(pokeChoiceThree);
 				if(playerOne.getPokemon(1).getCurrentHealth() == 0)
 				{
-					pokeChoiceOne.setEnabled(false);
+					pokeChoiceTwo.setEnabled(false);
 				}
 				
 				
@@ -351,6 +366,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//Attack Case
 			case 3:
 			{
+				startHealth = playerTwoCurrentPokemon.getCurrentHealth();
+				
 				int i = 5;
 				
 				JButton attack;
@@ -395,9 +412,27 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 					
 					i++;
 				}
+				break;
 			}
 			
-			
+			case 4:
+			{
+				JLabel outcomeLabel = new JLabel("   Outcome:");
+				dynamicPanel.add(outcomeLabel);
+				
+				if(startHealth == playerTwoCurrentPokemon.getCurrentHealth())
+				{
+					JLabel fail = new JLabel("     YOU MISSED");
+					dynamicPanel.add(fail);
+				}
+				else
+				{
+					JLabel success = new JLabel("     YOU HIT");
+					dynamicPanel.add(success);
+				}
+				
+				break;
+			}
 			
 			default:
 				break;
@@ -407,6 +442,8 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		dynamicPanel.repaint();
 		
 	}
+	
+
 	
 	
 	void interactionPane()
@@ -457,6 +494,21 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			e.printStackTrace();
 		}
 	}
+	
+	
+	void checkIfWon()
+	{
+		if(playerTwo.getPokemon(0).getCurrentHealth() == 0)
+			if(playerTwo.getPokemon(1).getCurrentHealth() == 0)
+				if(playerTwo.getPokemon(2).getCurrentHealth() == 0)
+				{
+					this.setVisible(false);
+					e.getBattleGui(0).setVisible(false);
+					e.getBattleGui(1).setVisible(false);
+					new WinnerGui(playerNum);
+				}
+	}
+	
 	
 	
 	
@@ -547,6 +599,11 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//clears dynamic pane
 			dynamicOption = 2;
 			dynamicPane();
+			//print outcome
+			dynamicOption = 4;
+			dynamicPane();
+			
+			checkIfWon();
 		}
 		
 		if(e.getSource() == attackChoiceTwo)
@@ -559,6 +616,11 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//clears dynamic pane
 			dynamicOption = 2;
 			dynamicPane();
+			//print outcome
+			dynamicOption = 4;
+			dynamicPane();
+			
+			checkIfWon();
 		}
 		
 		if(e.getSource() == attackChoiceThree)
@@ -572,6 +634,11 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//clears dynamic pane
 			dynamicOption = 2;
 			dynamicPane();
+			//print outcome
+			dynamicOption = 4;
+			dynamicPane();
+			
+			checkIfWon();
 		}
 		
 		if(e.getSource() == attackChoiceFour)
@@ -585,6 +652,11 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//clears dynamic pane
 			dynamicOption = 2;
 			dynamicPane();
+			//print outcome
+			dynamicOption = 4;
+			dynamicPane();
+			
+			checkIfWon();
 		}
 		
 	}

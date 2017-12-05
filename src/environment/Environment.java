@@ -243,6 +243,11 @@ public class Environment implements Observer, Iterator {
 		this.timer.register(o);
 	}
 	
+	/**
+	 * Sets the battleGui references
+	 * @param gui
+	 * @param playerNum
+	 */
 	public void setBattleGui(WindowBuilderBattleGui gui, int playerNum)
 	{
 		if(playerNum == 0)
@@ -253,8 +258,26 @@ public class Environment implements Observer, Iterator {
 		{
 			this.p2 = gui;
 		}
-		
 	}
+	
+	/**
+	 * Returns the requested battleGui reference
+	 * @param playerNum
+	 * @return
+	 */
+	public WindowBuilderBattleGui getBattleGui(int playerNum)
+	{
+		if(playerNum == 0)
+		{
+			return this.p1;
+		}
+		if(playerNum == 1)
+		{
+			return this.p2;
+		}
+		return null;
+	}
+	
 	
 	/* ******************************************************
 	 * 						End Command					    *
