@@ -442,6 +442,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		playerTwoCurrentPokemon = playerTwo.getActivePokemon();
 		ourInfoPane();
 		oppInfoPane();
+		//System.out.println();
 		try
 		{
 			ourPicPane();
