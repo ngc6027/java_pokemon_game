@@ -15,8 +15,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
-
 import commands.AttackCommand;
 import commands.ChangeActivePokemonCommand;
 
@@ -29,6 +27,7 @@ import javax.swing.JLayeredPane;
  * @author derekgrove, Michael Pulliam
  *
  */
+@SuppressWarnings("serial")
 public class WindowBuilderBattleGui extends JFrame implements ActionListener
 {
 	//setup
@@ -210,17 +209,14 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		interactionPane.setBackground(Color.LIGHT_GRAY);
 		interactionPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 0), Color.BLACK));
 		mainPanel.add(interactionPane);
-		interactionPane.setLayout(new GridLayout(2, 2, 0, 0));
-		
-		
+		interactionPane.setLayout(new GridLayout(2, 2, 0, 0));	
 		interactionPane();
-	
-		
-
-		
 	}
 	
-	// creates the opp healthbar and name
+	
+	/**
+	 * creates the opp healthbar and name
+	 */
 	private void oppInfoPane()
 	{
 		opponentInfo.removeAll();
@@ -241,6 +237,9 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	}
 	
 	
+	/**
+	 * The pane that shows the current player info
+	 */
 	private void ourInfoPane()
 	{
 		ourInfo.removeAll();
@@ -271,7 +270,10 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		ourInfo.repaint();
 	}
 	
-	// creates picture of the opp
+	
+	/**
+	 * creates picture of the opp
+	 */
 	private void opponentPicPane() throws IOException
 	{
 		opponentPic.removeAll();
@@ -292,7 +294,10 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		opponentPic.repaint();
 	}
 	
-	// creats the player you play as picture
+	/**
+	 *  creats the player you play as picture
+	 * @throws IOException
+	 */
 	private void ourPicPane() throws IOException
 	{
 		ourPic.removeAll();
@@ -312,13 +317,12 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	}
 	
 	
-	// the litte selection screen that tells you the turn
+	/**
+	 *  the litte selection screen that tells you the turn
+	 */
 	public void dynamicPane()
 	{
 		dynamicPanel.removeAll();
-		
-	
-		
 		
 		//swtich statement decides what to put in the panel dependent on what button was clicked
 		switch(dynamicOption)
@@ -361,8 +365,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				{
 					pokeChoiceTwo.setEnabled(false);
 				}
-				
-				
+					
 				break;
 		    }
 			
@@ -465,7 +468,9 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	
 
 	
-	
+	/**
+	 * Places the main interaction buttons
+	 */
 	void interactionPane()
 	{
 		//attack button
@@ -522,7 +527,9 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		}
 	}
 	
-	
+	/**
+	 * Check if either player has won
+	 */
 	void checkIfWon()
 	{
 		if(playerTwo.getPokemon(0).getCurrentHealth() == 0)
@@ -539,7 +546,9 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	
 	
 	
-	
+	/**
+	 * Takes input from all buttons
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -697,10 +706,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			dynamicOption = 4;
 			dynamicPane();
 			
-			
-			
 			checkIfWon();
 		}
-		
 	}
 }
