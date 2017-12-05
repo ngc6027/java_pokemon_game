@@ -16,6 +16,7 @@ public class WinnerGui extends JFrame
 
 	/**
 	 * Create the application.
+	 * @author Derek Groove, Michael Pulliam
 	 */
 	public WinnerGui(int playerNum)
 	{

@@ -26,7 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JLayeredPane;
 
 /**
- * @author derekgrove
+ * @author derekgrove, Michael Pulliam
  *
  */
 public class WindowBuilderBattleGui extends JFrame implements ActionListener
@@ -220,7 +220,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		
 	}
 	
-	
+	// creates the opp healthbar and name
 	private void oppInfoPane()
 	{
 		opponentInfo.removeAll();
@@ -271,7 +271,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		ourInfo.repaint();
 	}
 	
-	
+	// creates picture of the opp
 	private void opponentPicPane() throws IOException
 	{
 		opponentPic.removeAll();
@@ -292,7 +292,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 		opponentPic.repaint();
 	}
 	
-	
+	// creats the player you play as picture
 	private void ourPicPane() throws IOException
 	{
 		ourPic.removeAll();
@@ -312,7 +312,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 	}
 	
 	
-	
+	// the litte selection screen that tells you the turn
 	public void dynamicPane()
 	{
 		dynamicPanel.removeAll();
@@ -379,6 +379,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				
 				JButton attack;
 				 
+				// gets the pokemon attacks
 				while(playerOneCurrentPokemon.hasNext())
 				{
 					attack = new JButton(playerOneCurrentPokemon.next().getDescription());
@@ -422,8 +423,10 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				break;
 			}
 			
+			// prints out the outcome of the attack on the dynamic panel
 			case 4:
 			{
+	
 				JLabel outcomeLabel = new JLabel("   Outcome:");
 				dynamicPanel.add(outcomeLabel);
 				
@@ -441,7 +444,7 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 				break;
 			}
 			
-			
+			// prints out whose turn it is on the dynamic panel
 			case 5:
 			{
 				JLabel turnLabel = new JLabel("Your turn");
@@ -555,11 +558,15 @@ public class WindowBuilderBattleGui extends JFrame implements ActionListener
 			//close program
 			System.exit(0);
 		}
+		
+		//if(playerOne.getActivePokemon().getCurrentState() == 0)
+		//{
 		if(e.getSource() == pokemonButton)
 		{
 			//draw the pick pokemon options in the dynamic panel
 			dynamicOption = 1;
 			dynamicPane();
+		//}
 		}
 		if(e.getSource() == bagButton)
 		{

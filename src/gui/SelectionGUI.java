@@ -21,6 +21,12 @@ import lifeform.*;
 import environment.*;
 import gameplay.Observer;
 
+/**
+ * 
+ * @author Michael Pulliam, Derek Groove
+ *
+ */
+
 public class SelectionGUI extends JFrame implements ActionListener, Observer
 {
 
@@ -44,6 +50,8 @@ SelectPokemonCommand select;
 
 Font font = new Font("Courier", Font.BOLD,10);
 
+
+// creates the basics of the selection gui
 public SelectionGUI() throws IOException 
 {
 	//set the frame

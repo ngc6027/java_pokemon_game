@@ -12,6 +12,12 @@ import environment.*;
 
 import lifeform.*;
 
+/**
+ * 
+ * @author Michael Pulliam, Derek Groove
+ *
+ */
+
 public class ConfirmGUI extends JFrame implements ActionListener
 {
 	JPanel mainPanel;
@@ -32,6 +38,7 @@ public class ConfirmGUI extends JFrame implements ActionListener
 		buildGuts();
 	}
 	
+	// builts the basic of it
 	void buildGuts()
 	{
 		mainPanel = new JPanel(new BorderLayout());
@@ -95,6 +102,7 @@ public class ConfirmGUI extends JFrame implements ActionListener
 	}
 	
 
+	// players two pokemon 
 	void playerTwoPanel()
 	{
 		JButton name1 = new JButton("PLAYER TWO"); 

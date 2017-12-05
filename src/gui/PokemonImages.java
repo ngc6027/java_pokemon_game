@@ -9,6 +9,11 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+/**
+ * 
+ * @author Michael Foreman
+ *
+ */
 public class PokemonImages {
 	
 	private static String[] pokemonNames = {"Squirtle", "Wartortle", "Blastoise", "Poliwag",
