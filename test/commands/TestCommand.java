@@ -113,7 +113,7 @@ public class TestCommand {
 		c.setAttack(0);
 		c.execute();
 		
-		assertEquals(90, e.getPlayer(1).getActivePokemon().getCurrentHealth());
+		assertEquals(65, e.getPlayer(1).getActivePokemon().getCurrentHealth());
 	}
 	
 }
