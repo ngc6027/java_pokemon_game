@@ -68,6 +68,9 @@ public class Environment implements Observer, Iterator {
 			timer.register(players.get(i));
 		}
 		
+		p1 = null;
+		p2 = null;
+		
 		resetGame();
 	}
 	
@@ -198,8 +201,7 @@ public class Environment implements Observer, Iterator {
 			this.players.get(playerNum).attack(attackNum);
 			this.timer.update();
 			
-			p1.updateAllPanes();
-			p2.updateAllPanes();
+			this.updateAllPanes();
 		}
 	}
 	
@@ -229,11 +231,23 @@ public class Environment implements Observer, Iterator {
 			this.timer.update();
 		}
 		
-		p1.updateAllPanes();
-		p2.updateAllPanes();
+		updateAllPanes();
 		
 	}
 	
+	private void updateAllPanes() {
+		if(p1 != null)
+		{
+			p1.updateAllPanes();
+		}
+		
+		if(p2 != null)
+		{
+			p2.updateAllPanes();
+		}
+		
+	}
+
 	/**
 	 * Registers an Observer with the game's Timer.
 	 * @param o
@@ -331,7 +345,7 @@ public class Environment implements Observer, Iterator {
 	{
 		Pokemon rc = null;
 		
-		if((index > 0) && (index < pokemon.size()))
+		if((index >= 0) && (index < pokemon.size()))
 		{
 			rc = pokemon.get(index);
 		}

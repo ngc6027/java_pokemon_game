@@ -111,7 +111,7 @@ public class TestEnvironment {
 		e.changeActivePokemon(0, 1);
 		
 		e.attack(2, 0);
-		assertEquals(70, e.getPlayer(1).getActivePokemon().getCurrentHealth());
+		assertEquals(45, e.getPlayer(1).getActivePokemon().getCurrentHealth());
 		
 	}
 }
